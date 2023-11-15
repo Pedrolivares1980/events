@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <!-- Nombre de la empresa -->
+    <h3>{{ event.organizer.company_name }}'s Event</h3>
+
+    <!-- Formulario para editar el evento -->
+    <h2>Edit Event: {{ event.title }}</h2>
+    <form method="post">
+        <!-- Title Field -->
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ event.title }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" class="form-control" name="location" id="location" value="{{ event.location }}">
+        </div>
+
+        <!-- Description Field -->
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description"
+                required>{{ event.description }}</textarea>
+        </div>
+
+        <!-- Event Type Field -->
+        <div class="mb-3">
+            <label for="event_type" class="form-label">Event Type</label>
+            <select class="form-control" id="event_type" name="event_type">
+                <option value="Concert" {% if event.event_type=='Concert' %}selected{% endif %}>Concert</option>
+                <option value="Sport" {% if event.event_type=='Sport' %}selected{% endif %}>Sport</option>
+                <option value="Theatre" {% if event.event_type=='Theatre' %}selected{% endif %}>Theatre</option>
+                <option value="Cinema" {% if event.event_type=='Cinema' %}selected{% endif %}>Cinema</option>
+                <option value="Exhibition" {% if event.event_type=='Exhibition' %}selected{% endif %}>Exhibition
+                </option>
+                <option value="Festival" {% if event.event_type=='Festival' %}selected{% endif %}>Festival</option>
+                <option value="Workshop" {% if event.event_type=='Workshop' %}selected{% endif %}>Workshop</option>
+                <option value="Other" {% if event.event_type=='Other' %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+
+
+
+        <!-- Event Date Field -->
+        <div class="mb-3">
+            <label for="event_date" class="form-label">Event Date</label>
+            <input type="date" class="form-control" id="event_date" name="event_date" value="{{ event.event_date }}">
+        </div>
+
+
+        <!-- Start Time Field -->
+        <div class="mb-3">
+            <label for="start_time" class="form-label">Start Time</label>
+            <input type="time" class="form-control" id="start_time" name="start_time"
+                value="{{ event.start_time | totime }}" required>
+        </div>
+
+        <!-- Duration Field -->
+        <div class="mb-3">
+            <label for="duration" class="form-label">Duration (in minutes)</label>
+            <input type="number" class="form-control" id="duration" name="duration" value="{{ event.duration }}"
+                required>
+        </div>
+
+        <!-- Capacity Field -->
+        <div class="mb-3">
+            <label for="capacity" class="form-label">Capacity</label>
+            <input type="number" class="form-control" id="capacity" name="capacity" value="{{ event.capacity }}"
+                required>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <!-- Cancel Button -->
+        <a href="{{ url_for('business_profile') }}" class="btn btn-danger">Cancel</a>
+    </form>
+</div>
+{% endblock %}
+
+{% macro todate(value) %}
+{{ value.strftime('%Y-%m-%d') if value }}
+{% endmacro %}
+
+{% macro totime(value) %}
+{{ value.strftime('%H:%M') if value }}
+{% endmacro %}

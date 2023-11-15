@@ -1,0 +1,133 @@
+/* Import Google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&family=Poppins:wght@400;500&display=swap");
+
+/* Reset styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', 'Poppins', sans-serif;
+}
+
+:root{
+  --bg-dark:#16396E;
+  --bg-light:#78A8F0;
+  --container-light:#2F7BED;
+  --container-dark:#374D6E;
+  --border:#2561BA;
+  --text-color:#F0F0F0;
+  --title-color:#FFFFFF;
+}
+
+html, body {
+  height: 100%;
+  color: var(--text-color);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-light);
+  padding-top: 3.2rem;
+}
+
+/* BASE */
+
+#base_navbar{
+  background-color: var(--bg-dark);
+}
+
+
+main {
+  flex: 1 0 auto;
+  margin: 0 auto;
+}
+
+footer {
+  flex-shrink: 0;
+  background-color: var(--bg-dark);
+  color: var(--title-color);
+}
+
+.logo{
+  width: 50px;
+}
+
+.custom-navbar .nav-link, .custom-navbar .navbar-brand {
+  color: var(--title-color); /* Cambia el color del texto a rojo */
+}
+
+.custom-navbar .navbar-toggler {
+  border-color: var(--title-color); /* Cambia el color del borde del botón de navegación a rojo */
+}
+
+.custom-navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='white' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* Cambia el color de las líneas del botón de navegación a rojo */
+}
+
+/* ----------------------------------------- INDEX ------------------------------------------------------------------------- */
+
+.title_events{
+  color: var(--title-color);
+  font-size: large;
+  font-weight: bolder;
+  margin-top: 2rem;
+  margin-bottom: 2.2rem;
+  border-bottom: 1px dashed var(--title-color);
+}
+
+
+/* CAROUSEL */
+
+.carousel-item img {
+  height: 400px; /* Ajusta esto según tus necesidades */
+  object-fit: cover;
+}
+
+.event_cards{
+  background-color: var(--container-dark);
+  border-radius: 2rem;
+}
+
+.event_cards img{
+  border-radius: 2rem;
+}
+
+.event_accordion{
+  background-color: var(--border); 
+  color: var(--text-color); 
+}
+
+
+/* ---------------------------------------------------EVENTS */
+
+.form_container{
+  background-color: var(--container-dark);
+  color: var(--title-color);
+}
+
+.form_content{
+  background-color: var(--container-light);
+  color: var(--text-color);
+}
+
+
+
+/* -----------------------------------------------REGISTER */
+
+.register_form, .login_form{
+  background-color: var(--container-dark);
+  border-radius: 20px;
+  max-width: 50rem;
+  margin: 0 auto;
+  gap: 2rem;
+
+}
+
+/* --------------PROFILE */
+
+.profile_event_cards{
+  background-color: var(--container-dark);
+  text-align: center;
+  /* height: 30rem; */
+}

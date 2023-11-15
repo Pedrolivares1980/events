@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">All Events</h2>
+
+    <!-- Filter and Search Form -->
+    <div class="container mt-3">
+        <form action="{{ url_for('events') }}" method="get" class="card p-4 form_container">
+            <h3 class="text-center">Filter the events</h3>
+            <div class="row">
+                <!-- Event Type Filter -->
+                <div class="col-12 col-md-6 col-lg-3 mb-3">
+                    <label for="event_type" class="form-label">Type:</label>
+                    <select name="event_type" id="event_type" class="form-select form_content">
+                        <option value="">All Types</option>
+                        {% for type in event_types %}
+                        <option value="{{ type }}" {% if type==event_type %} selected {% endif %}>{{ type }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+    
+                <!-- Date Range Filter -->
+                <div class="col-12 col-md-6 col-lg-3 mb-3">
+                    <label for="start_date" class="form-label">Start Date:</label>
+                    <input type="date" name="start_date" id="start_date" value="{{ start_date }}" class="form-control form_content">
+                </div>
+                <div class="col-12 col-md-6 col-lg-3 mb-3">
+                    <label for="end_date" class="form-label">End Date:</label>
+                    <input type="date" name="end_date" id="end_date" value="{{ end_date }}" class="form-control form_content">
+                </div>
+    
+                <!-- General Search -->
+                <div class="col-12 col-md-6 col-lg-3 mb-3">
+                    <label for="search" class="form-label">Search:</label>
+                    <input type="text" name="search" id="search" value="{{ search }}" placeholder="Type to search" class="form-control form_content">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary ms-auto me-2 ">Filter</button>
+                    <a href="{{ url_for('events') }}" class="btn btn-success ms-2 me-auto ">Clear Filters</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+
+        <!-- Display Events -->
+        <!-- <div class="row mt-4">
+            {% for event in events %}
+            <div class="col-md-4 mb-3">
+                <div class="card event_cards">
+                    <img src="{{ url_for('static', filename='images/' ~ event.event_image) }}" class="card-img-top"
+                        alt="{{ event.title }}">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ event.title }}</h5>
+                        <p class="card-text">{{ event.description }}</p>
+                        <p class="card-text">Type: {{ event.event_type }}</p>
+
+                        <p class="card-text">Location: {{ event.location }}</p>
+
+                        <p class="card-text">Organizer: {{ event.organizer.company_name }}</p>
+                        <p class="card-text">Date: {{ event.event_date.strftime('%d %b %Y') }}</p>
+                        <p class="card-text">Start Time: {{ event.start_time.strftime('%H:%M') }}</p>
+                        <p class="card-text">Duration: {{ event.duration }} hours</p>
+                        <p class="card-text">Available Seats: {{ event.available_seats }}</p>
+
+                        {% if event.available_seats > 0 %}
+                        <a href="{{ url_for('reserve', event_id=event.id) }}" class="btn btn-primary">Reserve Seats</a>
+                        {% else %}
+                        <p class="text-danger">SOLD OUT</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <p>No events found.</p>
+            {% endfor %}
+        </div> -->
+        <div class="row mt-4">
+            {% for event in events %}
+            <div class="col-md-4 mb-3">
+                <div class="card event_cards">
+                    <!-- Parte del acordeón visible inicialmente -->
+                    <img src="{{ url_for('static', filename='images/' ~ event.event_image) }}" class="card-img-top" alt="{{ event.title }}">
+        
+                    <!-- Contenido del acordeón -->
+                    <div class="accordion" id="accordionEvent{{ event.id }}">
+                        <div class="accordion-item text-center">
+                            <h2 class="accordion-header" id="heading{{ event.id }}">
+                                <button class="accordion-button  collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ event.id }}" aria-expanded="false" aria-controls="collapse{{ event.id }}">
+                                    {{ event.title }}
+                                </button>
+                            </h2>
+                            <div id="collapse{{ event.id }}" class="accordion-collapse collapse" aria-labelledby="heading{{ event.id }}" data-bs-parent="#accordionEvent{{ event.id }}">
+                                <div class="accordion-body event_accordion">
+                                    <p class="card-text">{{ event.description }}</p>
+                                    <p class="card-text">Type: {{ event.event_type }}</p>
+                                    <p class="card-text">Location: {{ event.location }}</p>
+                                    <p class="card-text">Organizer: {{ event.organizer.company_name }}</p>
+                                    <p class="card-text">Date: {{ event.event_date.strftime('%d %b %Y') }}</p>
+                                    <p class="card-text">Start Time: {{ event.start_time.strftime('%H:%M') }}</p>
+                                    <p class="card-text">Duration: {{ event.duration }} hours</p>
+                                    <p class="card-text">Available Seats: {{ event.available_seats }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Botón de reserva -->
+                    <div class="card-footer ms-auto me-auto">
+                        {% if event.available_seats > 0 %}
+                        <a href="{{ url_for('reserve', event_id=event.id) }}" class="btn btn-success">Book now</a>
+                        {% else %}
+                        <p class="text-danger">SOLD OUT</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <p>No events found.</p>
+            {% endfor %}
+        </div>
+        
+
+        <!-- Pagination Controls -->
+        <div class="pagination_controls">
+            <nav aria-label="Events pagination">
+                <ul class="pagination filter_controls">
+                    <!-- Previous Page Link -->
+                    <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+                        <a class="page-link" href="{{ url_for('events', page=pagination.prev_num) }}" {% if not
+                            pagination.has_prev %}aria-disabled="true" {% endif %}>Previous</a>
+                    </li>
+                    <!-- Page Numbers -->
+                    {% for page_num in pagination.iter_pages() %}
+                    <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
+                        <a class="page-link" href="{{ url_for('events', page=page_num) }}">{{ page_num }}</a>
+                    </li>
+                    {% endfor %}
+                    <!-- Next Page Link -->
+                    <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+                        <a class="page-link" href="{{ url_for('events', page=pagination.next_num) }}" {% if not
+                            pagination.has_next %}aria-disabled="true" {% endif %}>Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/events.js') }}"></script>
+{% endblock %}

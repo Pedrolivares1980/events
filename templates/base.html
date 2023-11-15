@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Web App</title>
+  <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+  <header class="container">
+    <nav class="navbar navbar-expand-md custom-navbar fixed-top" id="base_navbar">
+      <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+          aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="{{ url_for('index') }}">EventSphere </a>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link "  href="{{ url_for('events') }}">Events</a>
+            </li>
+            {% if 'user_id' not in session %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+            </li>
+
+            {% else %}
+            {% if session['is_business'] %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('business_profile') }}">Business Profile</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('user_profile') }}">User Profile</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+  </header>
+
+  <main class="container mt-4 ">
+    <!-- Flash messages display -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-messages mt-3">
+      {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show text-center" role="alert">
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <footer class="footer mt-auto py-3 text-center">
+    <div class="container">
+      <div class="row">
+        <!-- Nombre de la página y Descripción -->
+        <div class="col-md-4">
+          <h5>Nombre de la Página</h5>
+          <p class="text-muted">Breve descripción de la página o misión.</p>
+        </div>
+
+        <!-- Contacto -->
+        <div class="col-md-4">
+          <h5>Contacto</h5>
+          <ul class="list-unstyled text-muted">
+            <li>Email: contacto@ejemplo.com</li>
+            <li>Teléfono: +1 234 567 890</li>
+          </ul>
+        </div>
+
+        <!-- Redes Sociales -->
+        <div class="col-md-4">
+          <h5>Redes Sociales</h5>
+          <a href="https://github.com/tuUsuario" class="text-muted me-2">
+            <i class="bi-github"></i>
+          </a>
+          <a href="https://www.youtube.com/tuCanal" class="text-muted me-2">
+            <i class="bi-youtube"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='js/flash.js') }}"></script>
+
+</body>
+
+</html>

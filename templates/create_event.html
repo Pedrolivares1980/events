@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <!-- Display Company Name -->
+    <div class="text-center my-4">
+        <h2>Your Company: {{ session.get('company_name', 'Your Company') }}</h2>
+    </div>
+
+    <h3>Create New Event</h3>
+    <form method="post">
+        <!-- Title Field -->
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="location" class="form-control">Location</label>
+            <input type="text" class="form-control" name="location" id="location" value="{{ event.location }}">
+        </div>
+
+        <!-- Description Field -->
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" required></textarea>
+        </div>
+
+        <!-- Start Date Field -->
+
+        <div class="mb-3">
+            <label for="event_date" class="form-label">Event Date</label>
+            <input type="date" class="form-control" id="event_date" name="event_date" required>
+        </div>
+
+        <!-- Start Time Field -->
+        <div class="mb-3">
+            <label for="start_time" class="form-label">Start Time</label>
+            <input type="time" class="form-control" id="start_time" name="start_time" required>
+        </div>
+
+        <!-- Duration Field -->
+        <div class="mb-3">
+            <label for="duration" class="form-label">Duration (in minutes)</label>
+            <input type="number" class="form-control" id="duration" name="duration" required>
+        </div>
+
+        <!-- Capacity Field -->
+        <div class="mb-3">
+            <label for="capacity" class="form-label">Capacity</label>
+            <input type="number" class="form-control" id="capacity" name="capacity" required>
+        </div>
+
+        <!-- Event Type Dropdown -->
+        <div class="mb-3">
+            <label for="event_type" class="form-label">Event Type</label>
+            <select class="form-select" id="event_type" name="event_type">
+                <option value="Concert">Concert</option>
+                <option value="Sport">Sport</option>
+                <option value="Theatre">Theatre</option>
+                <option value="Cinema">Cinema</option>
+                <option value="Exhibition">Exhibition</option>
+                <option value="Festival">Festival</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Create Event</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <!-- Event Details -->
+        <h2>Reserve Seats for {{ event.title }}</h2>
+        <p>Organized by: {{ event.organizer.username }}</p> <!-- Display the organizer's name -->
+        <p>Event Type: {{ event.event_type }}</p> <!-- Display event type -->
+        
+        <!-- Event Image -->
+        <div class="text-center mb-3">
+            <img src="{{ url_for('static', filename='images/' ~ event.event_image) }}" alt="{{ event.event_type }}" class="img-fluid">
+        </div>
+
+        <!-- Event Timings -->
+        <div class="mb-3">
+            <p ><strong>Location:</strong> {{ event.location }}</p>
+            <p><strong>Event Date:</strong> {{ event.start_time.strftime('%d %b %Y') }}</p>
+            <p><strong>Start Time:</strong> {{ event.start_time.strftime('%H:%M') }}</p>
+            <p><strong>Duration:</strong> {{ event.duration }} minutes</p>
+        </div>
+
+        <!-- Reservation Form -->
+        <form method="post" action="{{ url_for('reserve', event_id=event.id) }}">
+            <div class="mb-3">
+                <label for="seats" class="form-label">Number of Seats</label>
+                <input type="number" class="form-control" id="seats" name="seats" min="1" max="{{ event.available_seats }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Reserve</button>
+        </form>
+    </div>
+{% endblock %}

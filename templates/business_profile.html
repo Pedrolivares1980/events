@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Business Profile Section -->
+<div class="business-profile">
+    <h2 class="text-center text-capitalize">{{ business_name }}</h2>
+    <h3 class="text-center">Your Events</h3>
+    <div class="row mt-4">
+        {% for event in events %}
+        <div class="col-md-4 mb-3">
+            <div class="card mb-3 profile_event_cards">
+                <img src="{{ url_for('static', filename='images/' ~ event.event_image) }}" class="card-img-top" alt="{{ event.title }}">
+
+                <!-- Acordeón para cada evento -->
+                <div class="accordion" id="accordionEvent{{ event.id }}">
+                    <!-- Sección del Evento -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingEvent{{ event.id }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseEvent{{ event.id }}" aria-expanded="false"
+                                aria-controls="collapseEvent{{ event.id }}">
+                                {{ event.title }}
+                            </button>
+                        </h2>
+                        <div id="collapseEvent{{ event.id }}" class="accordion-collapse collapse"
+                            aria-labelledby="headingEvent{{ event.id }}" data-bs-parent="#accordionEvent{{ event.id }}">
+                            <div class="accordion-body event_accordion">
+                                <p class="card-text">{{ event.description }}</p>
+                                <p class="card-text">
+                                    Date: {{ event.event_date.strftime('%d %b %Y') }}<br>
+                                    Start Time: {{ event.start_time.strftime('%H:%M') }}<br>
+                                    Duration: {{ event.duration }} minutes
+                                </p>
+                                <p class="card-text">Location: {{ event.location }}</p>
+                                <p class="card-text">Capacity: {{ event.capacity }}</p>
+                                <p class="card-text">Seats Available: {{ event.available_seats }}</p>
+                                <p class="card-text">Sold Out: {{ 'Yes' if event.sold_out else 'No' }}</p>
+                                <a href="{{ url_for('edit_event', event_id=event.id) }}" class="btn btn-success">Edit Event</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección de Reservas -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingReservation{{ event.id }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseReservation{{ event.id }}" aria-expanded="false"
+                                aria-controls="collapseReservation{{ event.id }}">
+                                Reservations
+                            </button>
+                        </h2>
+                        <div id="collapseReservation{{ event.id }}" class="accordion-collapse collapse"
+                            aria-labelledby="headingReservation{{ event.id }}"
+                            data-bs-parent="#accordionEvent{{ event.id }}">
+                            <div class="accordion-body event_accordion">
+                                <!-- Reservas para el evento -->
+                                {% for reservation in event.reservations %}
+                                <div class="reservation border-2">
+                                    <p>Email: {{ reservation.user.email }}</p>
+                                    <p>Seats Reserved: {{ reservation.seats }}</p>
+                                </div>
+                                {% else %}
+                                <p>No reservations for this event yet.</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <p>You have not created any events yet.</p>
+        {% endfor %}
+    </div>
+
+    <div class="mb-3">
+        <a href="{{ url_for('create_event') }}" class="btn btn-success">Create New Event</a>
+    </div>
+</div>
+{% endblock %}
