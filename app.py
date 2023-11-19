@@ -278,6 +278,10 @@ def business_profile():
     """
     user_id = session['user_id']
     events = Event.query.filter_by(organizer_id=user_id).all()
+    
+    # Obtener el dato de company_name en lugar de username
+    user = User.query.get(user_id)
+    business_name = user.company_name
 
     # Calculate available seats for each event and check if it's sold out
     for event in events:
@@ -285,7 +289,7 @@ def business_profile():
         event.available_seats = event.capacity - total_reserved_seats
         event.sold_out = total_reserved_seats >= event.capacity
 
-    return render_template('business_profile.html', events=events, business_name=User.query.get(user_id).username)
+    return render_template('business_profile.html', events=events, business_name=business_name)
 
 
 
@@ -300,6 +304,8 @@ def create_event():
     if 'user_id' not in session or not User.query.get(session['user_id']).is_business:
         flash('Only business users can create events.', 'danger')
         return redirect(url_for('index'))
+    
+    company_name = User.query.get(session['user_id']).company_name
     
     if request.method == 'POST':
         title = request.form['title']
@@ -322,7 +328,7 @@ def create_event():
         flash('Event created successfully.', 'success')
         return redirect(url_for('business_profile'))
 
-    return render_template('create_event.html')
+    return render_template('create_event.html', company_name=company_name)
 
 
 @app.route('/edit_event/<int:event_id>', methods=['GET', 'POST'])
