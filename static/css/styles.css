@@ -95,6 +95,7 @@ main {
 .event_cards {
   background-color: var(--container-dark);
   border-radius: 1rem 1rem 0 0;
+  color: var(--text-color);
 }
 
 .event_cards img {
@@ -106,6 +107,15 @@ main {
   color: var(--text-color);
 }
 
+.index_cards{
+  background-color: var(--container-dark);
+  border-radius: 1rem;
+  color: var(--text-color);
+}
+
+.event_cards img {
+  border-radius: 1rem;
+}
 
 /* ---------------------------------------------------EVENTS */
 
