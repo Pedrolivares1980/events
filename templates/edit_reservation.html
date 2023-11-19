@@ -1,19 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container">
-        <h2>Edit Reservation for {{ event.title }}</h2>
-        
+<div class="container mb-4">
+    <h2 class="text-center">Edit Reservation for {{ event.title }}</h2>
+
+    <div class="reservation_card p-3">
         <!-- Display event details with Image, Type, and Organizer -->
-        <div class="event-details">
-            <img src="{{ url_for('static', filename='images/' ~ event.event_image) }}" alt="{{ event.title }}" class="img-fluid">
+        <div class="event-details ">
+            <img src="{{ url_for('static', filename='images/' ~ event.event_image) }}" alt="{{ event.title }}"
+                class="img-fluid">
             <p><strong>Event:</strong> {{ event.title }}</p>
-            <p ><strong>Location:</strong> {{ event.location }}</p>
+            <p><strong>Location:</strong> {{ event.location }}</p>
             <p><strong>Description:</strong> {{ event.description }}</p>
             <p><strong>Type:</strong> {{ event.event_type }}</p>
             <p><strong>Organizer:</strong> {{ event.organizer.company_name }}</p>
-            <!-- Updated Start Date and Time Display -->
-            <p><strong>Event Date:</strong> {{ event.start_time.strftime('%Y-%m-%d') }}</p>
+            <p><strong>Date:</strong> {{ event.event_date.strftime('%d %b %Y') }}</p>
             <p><strong>Start Time:</strong> {{ event.start_time.strftime('%H:%M') }}</p>
             <p><strong>Duration:</strong> {{ event.duration }} minutes</p>
             <p><strong>Capacity:</strong> {{ event.capacity }}</p>
@@ -23,13 +24,14 @@
         <form method="post">
             <div class="mb-3">
                 <label for="seats" class="form-label">Number of Seats</label>
-                <input type="number" class="form-control" id="seats" name="seats" value="{{ reservation.seats }}" min="1" required>
+                <input type="number" class="form-control" id="seats" name="seats" value="{{ reservation.seats }}"
+                    min="1" required>
             </div>
 
             <!-- Update and Cancel buttons -->
             <button type="submit" class="btn btn-primary">Update Reservation</button>
-            <button type="submit" name="cancel" class="btn btn-danger">Cancel Reservation</button>
+            <button type="submit" name="cancel" class="btn btn-danger mt-3 mt-md-0 ms-0 ms-md-2">Cancel Reservation</button>
         </form>
     </div>
+</div>
 {% endblock %}
-

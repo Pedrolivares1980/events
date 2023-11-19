@@ -7,8 +7,8 @@
     <h3 class="text-center">Your Events</h3>
     <div class="row mt-4">
         {% for event in events %}
-        <div class="col-md-4 mb-3">
-            <div class="card mb-3 profile_event_cards">
+        <div class="col-10 col-md-3 mb-3 ms-auto me-auto">
+            <div class="card mb-3 event_cards">
                 <img src="{{ url_for('static', filename='images/' ~ event.event_image) }}" class="card-img-top" alt="{{ event.title }}">
 
                 <!-- Acordeón para cada evento -->
@@ -41,7 +41,7 @@
                     </div>
 
                     <!-- Sección de Reservas -->
-                    <div class="accordion-item">
+                    <div class="accordion-item ">
                         <h2 class="accordion-header" id="headingReservation{{ event.id }}">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseReservation{{ event.id }}" aria-expanded="false"
@@ -74,7 +74,7 @@
     </div>
 
     <div class="mb-3">
-        <a href="{{ url_for('create_event') }}" class="btn btn-success">Create New Event</a>
+        <a href="{{ url_for('create_event') }}" class="btn btn-success w-auto">Create New Event</a>
     </div>
 </div>
 {% endblock %}

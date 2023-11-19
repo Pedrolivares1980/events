@@ -194,27 +194,38 @@ def reserve(event_id):
     """
     Route to handle reservations for an event.
     """
+    # Fetch the event or return 404 if not found
     event = Event.query.get_or_404(event_id)
     
+    # Check if the event exists (though get_or_404 should handle this)
     if not event:
         flash('Event not found.', 'error')
         return redirect(url_for('events'))
 
+    # Check if the user is logged in (your session logic may vary)
     if 'user_id' not in session:
         flash('You need to log in to make a reservation.', 'danger')
         return redirect(url_for('events'))
 
-    # Verificar si el usuario actual es de tipo "business" utilizando tu lógica personalizada
     if is_business_user():
         flash('Business users cannot make reservations.', 'danger')
         return redirect(url_for('events'))
 
+    # If the method is POST, process the reservation form
     if request.method == 'POST':
-        seats = int(request.form['seats'])
+        try:
+            seats = int(request.form['seats'])
+        except ValueError:
+            flash('Invalid number of seats.', 'danger')
+            return redirect(url_for('reserve', event_id=event_id))
+
+        # Calculate available seats
         total_reserved_seats = sum(reservation.seats for reservation in event.reservations)
         available_seats = event.capacity - total_reserved_seats
 
+        # Check if there are enough seats available
         if seats <= available_seats:
+            # Create and save the new reservation
             new_reservation = Reservation(user_id=session['user_id'], event_id=event.id, seats=seats)
             db.session.add(new_reservation)
             db.session.commit()
@@ -224,6 +235,12 @@ def reserve(event_id):
 
         return redirect(url_for('events'))
 
+    # Calculate available seats for GET requests
+    total_reserved_seats = sum(reservation.seats for reservation in event.reservations)
+    available_seats = event.capacity - total_reserved_seats
+    event.available_seats = available_seats
+
+    # Render the reservation page
     return render_template('reserve.html', event=event)
 
 
