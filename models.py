@@ -13,9 +13,9 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(128))
+    password_hash = db.Column(db.String)
     is_business = db.Column(db.Boolean, default=False)  # New field to indicate business user
-    company_name = db.Column(db.String(100))
+    company_name = db.Column(db.String)
     reservations = db.relationship('Reservation', backref='user', lazy='dynamic')
 
     def set_password(self, password):
@@ -34,7 +34,7 @@ class Event(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String, nullable=False)
     event_date = db.Column(db.Date, nullable=False)  # Fecha del evento
     start_time = db.Column(db.Time, nullable=False)  # Hora de inicio del evento
     duration = db.Column(db.Integer, nullable=False)  # Duración del evento en minutos
@@ -42,7 +42,7 @@ class Event(db.Model):
     organizer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     organizer = db.relationship('User', backref='organized_events')
     event_type = db.Column(db.String(50))
-    location = db.Column(db.String(120))
+    location = db.Column(db.String)
 
     reservations = db.relationship('Reservation', backref='event', lazy='dynamic')
     @property
