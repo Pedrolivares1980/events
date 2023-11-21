@@ -374,7 +374,7 @@ def create_event():
         if len(title) > 100:
             flash("Title is too long. Maximum 100 characters allowed.", "danger")
             return render_template("create_event.html", company_name=company_name)
-        if len(description) > 100:
+        if len(description) > 1000:
             flash("Description is too long. Maximum 100 characters allowed.", "danger")
             return render_template("create_event.html", company_name=company_name)
         if len(location) > 120:
@@ -429,7 +429,7 @@ def edit_event(event_id):
         if len(event.title) > 100:
             flash("Title is too long. Maximum 100 characters allowed.", "danger")
             return render_template("edit_event.html", event=event)
-        if len(event.description) > 100:
+        if len(event.description) > 1000:
             flash("Description is too long. Maximum 100 characters allowed.", "danger")
             return render_template("edit_event.html", event=event)
         if len(event.location) > 120:
