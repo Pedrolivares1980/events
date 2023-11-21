@@ -93,6 +93,7 @@ main {
 }
 
 .event_cards {
+  height: 350px;
   background-color: var(--container-dark);
   border-radius: 1rem 1rem 0 0;
   color: var(--text-color);
