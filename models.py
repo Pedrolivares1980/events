@@ -1,5 +1,3 @@
-# models.py
-
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
@@ -13,9 +11,9 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String)
+    password_hash = db.Column(db.String(128))
     is_business = db.Column(db.Boolean, default=False)  # New field to indicate business user
-    company_name = db.Column(db.String)
+    company_name = db.Column(db.String(100))
     reservations = db.relationship('Reservation', backref='user', lazy='dynamic')
 
     def set_password(self, password):
@@ -34,20 +32,19 @@ class Event(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.String, nullable=False)
-    event_date = db.Column(db.Date, nullable=False)  # Fecha del evento
-    start_time = db.Column(db.Time, nullable=False)  # Hora de inicio del evento
-    duration = db.Column(db.Integer, nullable=False)  # Duración del evento en minutos
-    capacity = db.Column(db.Integer, nullable=False)  # Aforo total del evento
+    description = db.Column(db.String(1000), nullable=False)
+    event_date = db.Column(db.Date, nullable=False) 
+    start_time = db.Column(db.Time, nullable=False) 
+    duration = db.Column(db.Integer, nullable=False) 
+    capacity = db.Column(db.Integer, nullable=False) 
     organizer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     organizer = db.relationship('User', backref='organized_events')
     event_type = db.Column(db.String(50))
-    location = db.Column(db.String)
+    location = db.Column(db.String(120))
 
     reservations = db.relationship('Reservation', backref='event', lazy='dynamic')
     @property
     def event_image(self):
-        """Devuelve la imagen correspondiente al tipo de evento."""
         event_images = {
             'Concert': 'concert.webp',
             'Sport': 'sport.webp',
@@ -67,8 +64,8 @@ class Reservation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
-    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)  # Fecha de la reserva
-    seats = db.Column(db.Integer, nullable=False)  # Número de asientos reservados
+    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow) 
+    seats = db.Column(db.Integer, nullable=False) 
 
     def __repr__(self):
         return f'<Reservation User: {self.user_id}, Event: {self.event_id}>'
