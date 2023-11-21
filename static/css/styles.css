@@ -93,6 +93,7 @@ main {
 }
 
 .event_cards {
+  background-color: var(--container-dark);
   border-radius: 1rem 1rem 0 0;
   color: var(--text-color);
 }
@@ -114,6 +115,18 @@ main {
 
 .event_cards img {
   border-radius: 1rem;
+}
+
+.event_cards .card-title, .event_cards .card-text {
+  max-height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.event_cards .accordion-button {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ---------------------------------------------------EVENTS */
