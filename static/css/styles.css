@@ -154,6 +154,10 @@ main {
   color: var(--text-color);
 }
 
+.login_form{
+  max-width: 25rem;
+}
+
 
 /* USER PROFILE */
 
