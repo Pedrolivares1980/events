@@ -1,31 +1,57 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <!-- User Profile Section -->
-    <div class="user-profile">
-        <h2 class="text-center text-danger">Welcome {{ user.username }}!</h2>
-        <h3 class="text-center">Your Bookings</h3>
-        <div class="reservations  ">
-            {% for reservation in reservations %}
-                <div class="card reservation_card mb-3 mt-4 col-12 col-md-6 col-lg-4">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ reservation.event.title }}</h5>
-                        <p class="card-text"><strong>Event Type:</strong> {{ reservation.event.event_type }}</p>
-                        <p class="card-text"><strong>Description:</strong> {{ reservation.event.description }}</p>
-                        <p class="card-text"><strong>Location:</strong> {{ reservation.event.location }}</p>
-                        <p class="card-text"><strong>Event Date:</strong> {{ reservation.event.event_date.strftime('%d %b %Y') }}</p>
-                        <p class="card-text"><strong>Start Time:</strong> {{ reservation.event.start_time.strftime('%H:%M') }}</p>
-                        <p class="card-text"><strong>Duration:</strong> {{ reservation.event.duration }} minutes</p>
-                        <p class="card-text"><strong>Organizer:</strong> {{ reservation.event.organizer.company_name }}</p>
-                        <p class="card-text"><strong>Seats Reserved:</strong> {{ reservation.seats }}</p>
-                        <a href="{{ url_for('edit_reservation', reservation_id=reservation.id) }}" class="btn btn-primary">Edit Reservation</a>
-                    </div>
-                </div>
-            {% else %}
-                <p>No reservations made yet.</p>
-            {% endfor %}
+<!-- User Profile Section -->
+<div class="d-flex flex-column ">
+  <div class="container-fluid flex-grow-1">
+    <h2 class="text-center text-danger">Welcome {{ user.username }}!</h2>
+    <h3 class="text-center">Here you can manage your Bookings</h3>
+    <div class="reservations">
+      {% for reservation in reservations %}
+      <div class="card reservation_card mb-3 mt-4 col-12 col-md-6 col-lg-4">
+        <div class="card-body">
+          <h5 class="card-title">{{ reservation.event.title }}</h5>
+          <p class="card-text"><strong>Event Type:</strong> {{ reservation.event.event_type }}</p>
+          <p class="card-text"><strong>Description:</strong> {{ reservation.event.description }}</p>
+          <p class="card-text"><strong>Location:</strong> {{ reservation.event.location }}</p>
+          <p class="card-text"><strong>Event Date:</strong> {{ reservation.event.event_date.strftime('%d %b %Y') }}</p>
+          <p class="card-text"><strong>Start Time:</strong> {{ reservation.event.start_time.strftime('%H:%M') }}</p>
+          <p class="card-text"><strong>Duration:</strong> {{ reservation.event.duration }} minutes</p>
+          <p class="card-text"><strong>Organizer:</strong> {{ reservation.event.organizer.company_name }}</p>
+          <p class="card-text"><strong>Seats Reserved:</strong> {{ reservation.seats }}</p>
+          <a href="{{ url_for('edit_reservation', reservation_id=reservation.id) }}" class="btn btn-primary">Edit
+            Reservation</a>
         </div>
+      </div>
+      {% else %}
+      <p>No reservations made yet.</p>
+      {% endfor %}
     </div>
+    <!-- Paginación -->
+    <div class="fixed-bottom-pagination">
+      <div class="pagination_controls text-center mt-4 mb-4">
+        <nav aria-label="Events pagination">
+          <ul class="pagination justify-content-center">
+            <!-- Previous Page Link -->
+            <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+              <a class="page-link" href="{{ url_for('user_profile', page=pagination.prev_num) }}" {% if not
+                pagination.has_prev %}aria-disabled="true" {% endif %}>Previous</a>
+            </li>
+            <!-- Page Numbers -->
+            {% for page_num in pagination.iter_pages() %}
+            <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
+              <a class="page-link" href="{{ url_for('user_profile', page=page_num) }}">{{ page_num }}</a>
+            </li>
+            {% endfor %}
+            <!-- Next Page Link -->
+            <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+              <a class="page-link" href="{{ url_for('user_profile', page=pagination.next_num) }}" {% if not
+                pagination.has_next %}aria-disabled="true" {% endif %}>Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
-
-

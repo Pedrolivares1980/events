@@ -4,10 +4,10 @@
 <!-- Business Profile Section -->
 <div class="business-profile">
     <h2 class="text-center text-capitalize">{{ business_name }}</h2>
-    <h3 class="text-center">Your Events</h3>
+    <h3 class="text-center">Here you can manage your Events and their Bookings</h3>
     <div class="row mt-4">
         {% for event in events %}
-        <div class="col-10 col-md-3 mb-3 ms-auto me-auto">
+        <div class="mb-3 mt-4 col-12 col-md-6 col-lg-4">
             <div class="card mb-3 event_cards">
                 <img src="{{ url_for('static', filename='images/' ~ event.event_image) }}" class="card-img-top" alt="{{ event.title }}">
 

@@ -169,21 +169,25 @@ def logout():
     return redirect(url_for("index"))
 
 
-# PROFILE
 @app.route("/user_profile")
 @login_required
 def user_profile():
-    """
-    User profile route for users to manage their reservations.
-    """
     if "user_id" not in session:
         flash("You need to login to access your profile.", "danger")
         return redirect(url_for("login"))
 
     user_id = session["user_id"]
+
+    # Parámetros de paginación
+    page = request.args.get("page", 1, type=int)
+    per_page = request.args.get("per_page", 10, type=int)  # Puedes ajustar el número por página
+
+    # Consulta con paginación
+    reservations_paginated = Reservation.query.filter_by(user_id=user_id).paginate(page=page, per_page=per_page, error_out=False)
+
     user = User.query.get(user_id)
-    reservations = Reservation.query.filter_by(user_id=user_id).all()
-    return render_template("user_profile.html", user=user, reservations=reservations)
+    return render_template("user_profile.html", user=user, reservations=reservations_paginated.items, pagination=reservations_paginated)
+
 
 
 @app.route("/events")
@@ -340,6 +344,12 @@ def business_profile():
     user_id = session["user_id"]
     events = Event.query.filter_by(organizer_id=user_id).all()
 
+    page = request.args.get("page", 1, type=int)
+    per_page = request.args.get("per_page", 10, type=int)  # Puedes ajustar el número por página
+
+    events_paginated = Event.query.filter_by(organizer_id=user_id).paginate(page=page, per_page=per_page, error_out=False)
+
+
     user = User.query.get(user_id)
     business_name = user.company_name
 
@@ -352,8 +362,7 @@ def business_profile():
         event.sold_out = total_reserved_seats >= event.capacity
 
     return render_template(
-        "business_profile.html", events=events, business_name=business_name
-    )
+        "business_profile.html", events=events_paginated.items, pagination=events_paginated, business_name=business_name )
 
 
 @app.route("/create_event", methods=["GET", "POST"])

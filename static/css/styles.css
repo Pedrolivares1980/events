@@ -42,35 +42,33 @@ textarea{
   background-color: var(--bg-dark);
 }
 
-
 main {
   flex: 1 0 auto;
   margin: 0 auto;
 }
-
-
-
-
-.logo{
-  width: 50px;
-}
-
 .custom-navbar .nav-link, .custom-navbar .navbar-brand {
-  color: var(--title-color); /* Cambia el color del texto a rojo */
+  color: var(--title-color); 
 }
 
 .custom-navbar .navbar-toggler {
-  border-color: var(--title-color); /* Cambia el color del borde del botón de navegación a rojo */
+  border-color: var(--title-color); 
 }
 
 .custom-navbar .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='white' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* Cambia el color de las líneas del botón de navegación a rojo */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='white' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
-/* Estilo para el enlace activo */
 .navbar-nav .active-link a {
-  color: #ff0000; /* Cambia este color al que desees */
-  /* Otros estilos que desees aplicar */
+  color: #ff0000; 
+
+}
+
+.fixed-bottom-pagination {
+  position: fixed;
+  bottom: 3rem; /* 3 rems por encima del fondo de la página */
+  left: 0;
+  right: 0;
+  z-index: 1030; /* Z-index para asegurarse de que se muestre por encima de otros elementos */
 }
 
 /* ----------------------------------------- INDEX ------------------------------------------------------------------------- */
@@ -88,7 +86,7 @@ main {
 /* CAROUSEL */
 
 .carousel-item img {
-  height: 400px; /* Ajusta esto según tus necesidades */
+  height: 400px; 
   object-fit: cover;
 }
 
@@ -99,7 +97,7 @@ main {
 }
 
 .event_cards img {
-  border-radius: 1rem 1rem 0 0; /* Redondea solo los bordes superiores de la imagen */
+  border-radius: 1rem 1rem 0 0; 
 }
 
 .event_accordion {
@@ -174,10 +172,10 @@ main {
   border-radius: 1rem;
 }
 
-.event-details img{
+/* .event-details img{
   border-radius: 1rem;
   width: 300px;
-}
+} */
 
 
 
@@ -192,36 +190,35 @@ footer {
   color: var(--title-color);
 }
 
-/* Estilos Generales de los Iconos */
+
 .social_icon {
-  border-radius: 50%; /* Crea un círculo */
-  background-color: var(--bg-dark); /* Fondo blanco */
-  display: inline-flex; /* Usa flex para centrar el contenido */
-  align-items: center; /* Centra verticalmente */
-  justify-content: center; /* Centra horizontalmente */
-  width: 40px; /* Ancho del círculo */
-  height: 40px; /* Altura del círculo */
-  padding: 5px; /* Espaciado interno */
+  border-radius: 50%;
+  background-color: var(--bg-dark);
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 5px;
   transition: all .5s ease-in-out;
 }
 
-/* Estilos de Iconos de Redes Sociales */
 .whatsapp_icon i {
-  color: #25D366; /* Color WhatsApp */
+  color: #25D366; 
 }
 
 .github_icon i {
-  color: #171515; /* Color GitHub */
+  color: #171515; 
 }
 
 .youtube_icon i {
-  color: #FF0000; /* Color YouTube */
+  color: #FF0000; 
 }
 
-/* Efecto Hover */
+
 .social_icon:hover {
-  transform: scale(1.2); /* Aumenta el tamaño del círculo */
-  filter: brightness(1.2) saturate(1.5); /* Hace el color más intenso y brillante */
+  transform: scale(1.2); 
+  filter: brightness(1.2) saturate(1.5); 
 }
 
 
@@ -229,7 +226,7 @@ footer {
 
 @media (min-width:980px) {
   .carousel-item img {
-    height: 800px; /* Ajusta esto según tus necesidades */
+    height: 800px;
     object-fit: contain;
   }
 }
