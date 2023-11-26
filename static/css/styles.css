@@ -17,6 +17,7 @@
   --border:#038282;
   --text-color:#F2F1DF;
   --title-color:#DFE6E9;
+  --text-dark:black;
 }
 
 html{
@@ -31,7 +32,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: var(--bg-light);
-  color: var(--text-color);
+  color: var(--text-dark);
 }
 
 main {
@@ -67,7 +68,7 @@ textarea{
 }
 
 .navbar-nav .active-link a {
-  color: black; 
+  border: 1px solid white; 
 }
 
 .logo{
@@ -133,7 +134,7 @@ textarea{
 
 .card_titles{
   font-size: 1.2rem;
-  color: black;
+  color: var(--text-color);
 }
 
 /* ------------------------------------------------------------------------- EVENTS -------------------------------------------------------------------------  */
