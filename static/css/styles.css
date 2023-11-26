@@ -10,13 +10,13 @@
 }
 
 :root{
-  --bg-dark:#16396E;
-  --bg-light:#78A8F0;
-  --container-light:#2F7BED;
-  --container-dark:#374D6E;
-  --border:#2561BA;
-  --text-color:#F0F0F0;
-  --title-color:#FFFFFF;
+  --bg-dark:#8C6542;
+  --bg-light:#DB9D67;
+  --container-light:#6085A6;
+  --container-dark:#1B4885;
+  --border:#038282;
+  --text-color:#F2F1DF;
+  --title-color:#DFE6E9;
 }
 
 html{
