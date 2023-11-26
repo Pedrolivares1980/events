@@ -84,14 +84,14 @@ textarea{
   font-weight: bolder;
   margin-top: 2rem;
   margin-bottom: 2.2rem;
-  border-bottom: 1px dashed var(--title-color);
+  border-bottom: .0625rem dashed var(--title-color);
 }
 
 
 /* CAROUSEL */
 
 .carousel-item img {
-  height: 400px; 
+  height: 25rem; 
   object-fit: cover;
 }
 
@@ -121,7 +121,7 @@ textarea{
 }
 
 .event_cards .card-title, .event_cards .card-text {
-  max-height: 100px;
+  max-height: 6.25rem;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -151,7 +151,7 @@ textarea{
 
 .accordion-body {
   overflow-y: auto;
-  max-height: 650px; 
+  max-height: 42rem; 
 }
 
 .scrolling-title {
@@ -165,12 +165,18 @@ textarea{
   white-space: normal;
 }
 
+.event-description-scrollable {
+  max-height: 10rem;
+  overflow-y: auto; 
+}
+
+
 
 /* ------------------------------------------------------------------------- REGISTER -------------------------------------------------------------------------  */
 
 .custom_form{
   background-color: var(--container-dark);
-  border-radius: 20px;
+  border-radius: 1.25rem;
   max-width: 50rem;
   margin: 0 auto;
   gap: 2rem;
@@ -194,14 +200,14 @@ textarea{
   background-color: var(--container-dark);
   color: var(--title-color);
   text-align: center;
-  border: 1.5px solid black;
+  border: .09rem solid black;
   border-radius: 1rem;
   margin: 0 auto;
 }
 
 .event-details img{
   border-radius: 1rem;
-  width: 300px;
+  width: 18.75rem;
 }
 
 
@@ -223,9 +229,9 @@ footer {
   display: inline-flex; 
   align-items: center; 
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  padding: 5px;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: .3125rem;
   transition: all .5s ease-in-out;
 }
 
@@ -252,7 +258,7 @@ footer {
 /* ------------------------------------------------------------------------- large Screens -------------------------------------------------------------------------  */
 @media (min-width:980px) {
   .carousel-item img {
-    height: 800px;
+    height: 50rem;
     object-fit: contain;
   }
 }
