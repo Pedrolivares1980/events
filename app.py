@@ -215,7 +215,7 @@ def events():
         )
 
     page = request.args.get("page", 1, type=int)
-    per_page = request.args.get("per_page", 12, type=int)
+    per_page = request.args.get("per_page", 8, type=int)
     events_paginated = query.paginate(page=page, per_page=per_page, error_out=False)
     event_types = [
         type[0] for type in Event.query.with_entities(Event.event_type).distinct().all()
