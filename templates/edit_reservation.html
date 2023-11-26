@@ -9,27 +9,27 @@
         <div class="event-details ">
             <img src="{{ url_for('static', filename='images/' ~ event.event_image) }}" alt="{{ event.title }}"
                 class="img-fluid">
-            <p><strong>Event:</strong> {{ event.title }}</p>
-            <p><strong>Location:</strong> {{ event.location }}</p>
-            <p><strong>Description:</strong> {{ event.description }}</p>
-            <p><strong>Type:</strong> {{ event.event_type }}</p>
-            <p><strong>Organizer:</strong> {{ event.organizer.company_name }}</p>
-            <p><strong>Date:</strong> {{ event.event_date.strftime('%d %b %Y') }}</p>
-            <p><strong>Start Time:</strong> {{ event.start_time.strftime('%H:%M') }}</p>
-            <p><strong>Duration:</strong> {{ event.duration }} minutes</p>
-            <p><strong>Capacity:</strong> {{ event.capacity }}</p>
+            <p><strong class="card_titles">Event:</strong> {{ event.title }}</p>
+            <p><strong class="card_titles">Location:</strong> {{ event.location }}</p>
+            <p><strong class="card_titles">Description:</strong> {{ event.description }}</p>
+            <p><strong class="card_titles">Type:</strong> {{ event.event_type }}</p>
+            <p><strong class="card_titles">Organizer:</strong> {{ event.organizer.company_name }}</p>
+            <p><strong class="card_titles">Date:</strong> {{ event.event_date.strftime('%d %b %Y') }}</p>
+            <p><strong class="card_titles">Start Time:</strong> {{ event.start_time.strftime('%H:%M') }}</p>
+            <p><strong class="card_titles">Duration:</strong> {{ event.duration }} minutes</p>
+            <p><strong class="card_titles">Available Seats:</strong> {{ event.available_seats }}</p>
         </div>
 
         <!-- Reservation form -->
         <form method="post">
             <div class="mb-3">
-                <label for="seats" class="form-label">Number of Seats</label>
-                <input type="number" class="form-control" id="seats" name="seats" value="{{ reservation.seats }}"
+                <label for="seats" class="form-label card_titles">Number of Seats:</label>
+                <input type="number" class="form-control text-center fw-bolder fs-2" id="seats" name="seats" value="{{ reservation.seats }}"
                     min="1" required>
             </div>
 
             <!-- Update and Cancel buttons -->
-            <button type="submit" class="btn btn-primary">Update Reservation</button>
+            <button type="submit" class="btn btn-success">Update Reservation</button>
             <button type="submit" name="cancel" class="btn btn-danger mt-3 mt-md-0 ms-0 ms-md-2">Cancel Reservation</button>
         </form>
     </div>

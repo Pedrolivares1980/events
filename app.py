@@ -292,13 +292,13 @@ def reserve(event_id):
 
     return render_template("reserve.html", event=event)
 
-
 @app.route("/edit_reservation/<int:reservation_id>", methods=["GET", "POST"])
 @login_required
 def edit_reservation(reservation_id):
     """
     Route for users to edit or cancel their reservation.
     """
+    # Fetch the reservation and the corresponding event or return 404 if not found
     reservation = Reservation.query.get_or_404(reservation_id)
     event = Event.query.get_or_404(reservation.event_id)
 
@@ -316,21 +316,33 @@ def edit_reservation(reservation_id):
         else:
             # Update the number of seats in the reservation
             seats = int(request.form["seats"])
-            # Check if the updated number of seats exceeds the event's capacity
-            if seats > event.capacity:
+            
+            # Calculate available seats excluding the current reservation
+            total_reserved_seats_by_others = sum(r.seats for r in event.reservations if r.id != reservation_id)
+            available_seats = event.capacity - total_reserved_seats_by_others
+
+            # Check if the updated number of seats is available
+            if seats <= available_seats:
+                reservation.seats = seats
+                db.session.commit()
+                flash("Reservation updated successfully.", "success")
+            else:
                 flash("Not enough seats available.", "danger")
-                return redirect(
-                    url_for("edit_reservation", reservation_id=reservation_id)
-                )
-            reservation.seats = seats
-            db.session.commit()
-            flash("Reservation updated successfully.", "success")
+                return redirect(url_for("edit_reservation", reservation_id=reservation_id))
 
         return redirect(url_for("user_profile"))
 
+
+    # Calculate available seats
+    total_reserved_seats = sum(reservation.seats for reservation in event.reservations)
+    available_seats = event.capacity - total_reserved_seats
+    event.available_seats = available_seats
+
     return render_template(
-        "edit_reservation.html", reservation=reservation, event=event
+        "edit_reservation.html", reservation=reservation, event=event, available_seats=available_seats
     )
+
+
 
 
 @app.route("/business_profile")

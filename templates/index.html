@@ -5,7 +5,7 @@
 <div class="container mt-5">
     <!-- Web Title and Description -->
     <div class="text-center">
-        <h1>EventSphere</h1>
+        <h1 class="logo">EventSphere</h1>
         <p>Discover and book your spot at the city's most exciting events.</p>
     </div>
 
@@ -37,9 +37,9 @@
                 <img src="{{ url_for('static', filename='images/' ~ event.event_image) }}" class="card-img-top" alt="{{ event.title }}">
                 <div class="card-body text-center">
                     <h3 class="card-title  text-capitalize">{{ event.title }}</h3>
-                    <p class="card-text"><small >Date: {{ event.event_date.strftime('%d %b %Y') }}</small></p>
-                    <p class="card-text"><small >Location: {{ event.location }}</small></p>
-                    <a href="{{ url_for('reserve', event_id=event.id) }}" class="btn btn-primary">Book now</a>
+                    <p class="card-text"><small class="card_titles">Date:</small> {{ event.event_date.strftime('%d %b %Y') }}</p>
+                    <p class="card-text"><small class="card_titles">Location:</small> {{ event.location }}</p>
+                    <a href="{{ url_for('reserve', event_id=event.id) }}" class="btn btn-success">Book now</a>
                 </div>
             </div>
         </div>

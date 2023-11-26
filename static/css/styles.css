@@ -19,17 +19,28 @@
   --title-color:#FFFFFF;
 }
 
-html, body {
+html{
   height: 100%;
-  color: var(--text-color);
+
 }
 
 body {
   display: flex;
   flex-direction: column;
+  min-height: 100vh; /* Asegura que el cuerpo ocupe al menos toda la altura de la ventana */
+  margin: 0;
+  padding: 0;
   background-color: var(--bg-light);
-  padding-top: 3.2rem;
+  color: var(--text-color);
 }
+
+main {
+  flex: 1; /* Hace que el contenido principal crezca para ocupar el espacio disponible */
+  margin: 0 auto;
+  overflow: auto; /* Permite el desplazamiento si el contenido es muy largo */
+  padding-top: 3.2rem; /* Espacio para la navbar si es necesario */
+}
+
 
 textarea{
   resize: none;
@@ -42,10 +53,7 @@ textarea{
   background-color: var(--bg-dark);
 }
 
-main {
-  flex: 1 0 auto;
-  margin: 0 auto;
-}
+
 .custom-navbar .nav-link, .custom-navbar .navbar-brand {
   color: var(--title-color); 
 }
@@ -63,12 +71,9 @@ main {
 
 }
 
-.fixed-bottom-pagination {
-  position: fixed;
-  bottom: 3rem; /* 3 rems por encima del fondo de la página */
-  left: 0;
-  right: 0;
-  z-index: 1030; /* Z-index para asegurarse de que se muestre por encima de otros elementos */
+.logo{
+  color: #FF0000;
+  font-weight: 700;
 }
 
 /* ----------------------------------------- INDEX ------------------------------------------------------------------------- */
@@ -127,6 +132,11 @@ main {
   text-overflow: ellipsis;
 }
 
+.card_titles{
+  font-size: 1.2rem;
+  color: #FF0000;
+}
+
 /* ---------------------------------------------------EVENTS */
 
 .form_container{
@@ -165,17 +175,19 @@ main {
 }
 
 .reservation_card{
+  max-width: 40rem;
   background-color: var(--container-dark);
   color: var(--title-color);
   text-align: center;
   border: 1.5px solid black;
   border-radius: 1rem;
+  margin: 0 auto;
 }
 
-/* .event-details img{
+.event-details img{
   border-radius: 1rem;
   width: 300px;
-} */
+}
 
 
 
@@ -185,11 +197,10 @@ main {
 
 
 footer {
-  flex-shrink: 0;
+  margin-top: auto; /* Hace que el footer sea pegajoso */
   background-color: var(--bg-dark);
   color: var(--title-color);
 }
-
 
 .social_icon {
   border-radius: 50%;

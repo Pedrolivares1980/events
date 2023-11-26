@@ -3,9 +3,7 @@
 {% block content %}
 <div class="container card p-4 custom_form mb-4">
     <!-- Event Details -->
-    <h2>Reserve Seats for {{ event.title }}</h2>
-    <p>Organized by: {{ event.organizer.username }}</p> <!-- Display the organizer's name -->
-    <p>Event Type: {{ event.event_type }}</p> <!-- Display event type -->
+    <h2 class="text-center fw-bolder fs-2">{{ event.title }}</h2>
 
     <!-- Event Image -->
     <div class="text-center mb-3">
@@ -14,19 +12,21 @@
     </div>
 
     <!-- Event Timings -->
-    <div class="mb-3">
-        <p><strong>Location:</strong> {{ event.location }}</p>
-        <p><strong>Event Date:</strong> {{ event.start_time.strftime('%d %b %Y') }}</p>
-        <p><strong>Start Time:</strong> {{ event.start_time.strftime('%H:%M') }}</p>
-        <p><strong>Duration:</strong> {{ event.duration }} minutes</p>
-        <p><strong>Available Seats:</strong> {{ event.available_seats }}</p>
+    <div class="mb-3 text-center">
+        <p><strong class="card_titles">Organized by:</strong>  {{ event.organizer.username }}</p>
+        <p><strong class="card_titles">Event Type:</strong> {{ event.event_type }}</p> 
+        <p><strong class="card_titles">Location:</strong> {{ event.location }}</p>
+        <p><strong class="card_titles">Event Date:</strong> {{ event.start_time.strftime('%d %b %Y') }}</p>
+        <p><strong class="card_titles">Start Time:</strong> {{ event.start_time.strftime('%H:%M') }}</p>
+        <p><strong class="card_titles">Duration:</strong> {{ event.duration }} minutes</p>
+        <p><strong class="card_titles">Available Seats:</strong> {{ event.available_seats }}</p>
     </div>
 
     <!-- Reservation Form -->
     <form method="post" action="{{ url_for('reserve', event_id=event.id) }}">
-        <div class="mb-3">
-            <label for="seats" class="form-label">Number of Seats</label>
-            <input type="number" class="form-control" id="seats" name="seats" min="1" max="{{ event.available_seats }}"
+        <div class="mb-3 text-center">
+            <label for="seats" class="form-label card_titles">Number of Seats</label>
+            <input type="number" class="form-control text-center fw-bolder fs-2" id="seats" name="seats" min="1" max="{{ event.available_seats }}"
                 required>
         </div>
         <div class="buttons col-4 my-2 ms-auto me-auto text-center">
