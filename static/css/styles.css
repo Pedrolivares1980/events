@@ -151,7 +151,7 @@ textarea{
 
 .accordion-body {
   overflow-y: auto;
-  max-height: 42rem; 
+  max-height: 50rem; 
 }
 
 .scrolling-title {
@@ -166,7 +166,7 @@ textarea{
 }
 
 .event-description-scrollable {
-  max-height: 10rem;
+  max-height: 20rem;
   overflow-y: auto; 
 }
 
