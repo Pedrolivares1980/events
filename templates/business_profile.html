@@ -27,14 +27,14 @@
               <div class="accordion-body event_accordion">
                 <p class="card-text">{{ event.description }}</p>
                 <p class="card-text">
-                  Date: {{ event.event_date.strftime('%d %b %Y') }}<br>
-                  Start Time: {{ event.start_time.strftime('%H:%M') }}<br>
-                  Duration: {{ event.duration }} minutes
+                  <strong class="card_titles">Date:</strong> {{ event.event_date.strftime('%d %b %Y') }}<br>
+                  <strong class="card_titles">Start Time:</strong> {{ event.start_time.strftime('%H:%M') }}<br>
+                  <strong class="card_titles">Duration:</strong> {{ event.duration }} minutes
                 </p>
-                <p class="card-text">Location: {{ event.location }}</p>
-                <p class="card-text">Capacity: {{ event.capacity }}</p>
-                <p class="card-text">Seats Available: {{ event.available_seats }}</p>
-                <p class="card-text">Sold Out: {{ 'Yes' if event.sold_out else 'No' }}</p>
+                <p class="card-text"><strong class="card_titles">Location:</strong> {{ event.location }}</p>
+                <p class="card-text"><strong class="card_titles">Capacity:</strong> {{ event.capacity }}</p>
+                <p class="card-text"><strong class="card_titles">Seats Available:</strong> {{ event.available_seats }}</p>
+                <p class="card-text"><strong class="card_titles">Sold Out:</strong> {{ 'Yes' if event.sold_out else 'No' }}</p>
                 <a href="{{ url_for('edit_event', event_id=event.id) }}" class="btn btn-success">Edit
                   Event</a>
               </div>
@@ -56,11 +56,11 @@
                 <!-- Events booking -->
                 {% for reservation in event.reservations %}
                 <div class="reservation border-2">
-                  <p>Email: {{ reservation.user.email }}</p>
-                  <p>Seats Reserved: {{ reservation.seats }}</p>
+                  <p><strong class="card_titles">Email:</strong> {{ reservation.user.email }}</p>
+                  <p><strong class="card_titles">Seats Reserved: </strong>{{ reservation.seats }}</p>
                 </div>
                 {% else %}
-                <p>No reservations for this event yet.</p>
+                <p class="text-center">No reservations for this event yet.</p>
                 {% endfor %}
               </div>
             </div>
