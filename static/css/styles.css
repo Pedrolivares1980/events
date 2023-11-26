@@ -149,6 +149,21 @@ textarea{
   color: var(--text-color);
 }
 
+.accordion-body {
+  overflow-y: auto;
+  max-height: 650px; 
+}
+
+.scrolling-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scrolling-title:hover {
+  overflow: visible;
+  white-space: normal;
+}
 
 
 /* ------------------------------------------------------------------------- REGISTER -------------------------------------------------------------------------  */
