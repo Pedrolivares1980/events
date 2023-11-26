@@ -27,7 +27,7 @@ html{
 body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Asegura que el cuerpo ocupe al menos toda la altura de la ventana */
+  min-height: 100vh;
   margin: 0;
   padding: 0;
   background-color: var(--bg-light);
@@ -35,10 +35,10 @@ body {
 }
 
 main {
-  flex: 1; /* Hace que el contenido principal crezca para ocupar el espacio disponible */
+  flex: 1;
   margin: 0 auto;
-  overflow: auto; /* Permite el desplazamiento si el contenido es muy largo */
-  padding-top: 3.2rem; /* Espacio para la navbar si es necesario */
+  overflow: auto;
+  padding-top: 3.2rem;
 }
 
 
@@ -47,7 +47,7 @@ textarea{
 }
 
 
-/* BASE */
+/* -------------------------------------------------------------------------  BASE -------------------------------------------------------------------------  */
 
 #base_navbar{
   background-color: var(--bg-dark);
@@ -72,11 +72,11 @@ textarea{
 }
 
 .logo{
-  color: #FF0000;
+  color: var(--text-color);
   font-weight: 700;
 }
 
-/* ----------------------------------------- INDEX ------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------  INDEX ------------------------------------------------------------------------- */
 
 .title_events{
   color: var(--title-color);
@@ -134,10 +134,10 @@ textarea{
 
 .card_titles{
   font-size: 1.2rem;
-  color: #FF0000;
+  color: black;
 }
 
-/* ---------------------------------------------------EVENTS */
+/* ------------------------------------------------------------------------- EVENTS -------------------------------------------------------------------------  */
 
 .form_container{
   background-color: var(--container-dark);
@@ -151,7 +151,7 @@ textarea{
 
 
 
-/* -----------------------------------------------REGISTER */
+/* ------------------------------------------------------------------------- REGISTER -------------------------------------------------------------------------  */
 
 .custom_form{
   background-color: var(--container-dark);
@@ -167,7 +167,7 @@ textarea{
 }
 
 
-/* USER PROFILE */
+/* -------------------------------------------------------------------------  USER PROFILE ------------------------------------------------------------------------- */
 
 .reservations{
   /* width: 350px; */
@@ -191,7 +191,7 @@ textarea{
 
 
 
-/* -------------------FOOTER */
+/* ------------------------------------------------------------------------- FOOTER -------------------------------------------------------------------------  */
 
 
 
@@ -234,7 +234,7 @@ footer {
 
 
 
-
+/* ------------------------------------------------------------------------- large Screens -------------------------------------------------------------------------  */
 @media (min-width:980px) {
   .carousel-item img {
     height: 800px;
