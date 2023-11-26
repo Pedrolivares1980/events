@@ -6,24 +6,20 @@ db = SQLAlchemy()
 
 class User(db.Model):
     """
-    Represents a user in the system. Can be either a regular user or a business user.
+    User model for storing user details.
     """
-    __tablename__ = 'users' 
-    
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(128))
-    is_business = db.Column(db.Boolean, default=False)  # New field to indicate business user
+    is_business = db.Column(db.Boolean, default=False)
     company_name = db.Column(db.String(100))
     reservations = db.relationship('Reservation', backref='user', lazy='dynamic')
 
     def set_password(self, password):
-        """Generates and sets the password hash."""
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
-        """Checks the password against the stored hash."""
         return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
@@ -32,10 +28,8 @@ class User(db.Model):
 
 class Event(db.Model):
     """
-    Represents an event created by a business user.
+    Event model for storing event details.
     """
-    __tablename__ = 'events' 
-
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(1000), nullable=False)
@@ -65,10 +59,8 @@ class Event(db.Model):
 
 class Reservation(db.Model):
     """
-    Represents a reservation made by a user for an event.
+    Reservation model for storing reservation details.
     """
-    __tablename__ = 'reservations'
-
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=False)
