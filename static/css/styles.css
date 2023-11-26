@@ -67,8 +67,7 @@ textarea{
 }
 
 .navbar-nav .active-link a {
-  color: #ff0000; 
-
+  color: black; 
 }
 
 .logo{
@@ -134,7 +133,7 @@ textarea{
 
 .card_titles{
   font-size: 1.2rem;
-  color: red;
+  color: black;
 }
 
 /* ------------------------------------------------------------------------- EVENTS -------------------------------------------------------------------------  */
