@@ -99,18 +99,18 @@
               <!-- Contenido del acordeón -->
               <div class="accordion" id="accordionEvent{{ event.id }}">
                 <div class="accordion-item text-center">
-                  <h2 class="accordion-header" id="heading{{ event.id }}">
+                  <h2 class="accordion-header" id="headingEvent{{ event.id }}">
                     <button class="accordion-button collapsed scrolling-title" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#collapse{{ event.id }}" aria-expanded="false"
-                      aria-controls="collapse{{ event.id }}">
+                      data-bs-target="#collapseEvent{{ event.id }}" aria-expanded="false"
+                      aria-controls="collapseEvent{{ event.id }}">
                       {{ event.title }}
                     </button>
                   </h2>
-                  
-                  <div id="collapse{{ event.id }}" class="accordion-collapse collapse"
-                    aria-labelledby="heading{{ event.id }}" data-bs-parent="#accordionEvent{{ event.id }}">
+                  <div id="collapseEvent{{ event.id }}" class="accordion-collapse collapse"
+                    aria-labelledby="headingEvent{{ event.id }}" data-bs-parent="#accordionEvent{{ event.id }}">
                     <div class="accordion-body event_accordion">
-                      <p class="card-text event-description-scrollable"><strong class="card_titles">Description:</strong> {{ event.description }}</p>
+                      <p class="card-text event-description-scrollable"><strong
+                          class="card_titles">Description:</strong> {{ event.description }}</p>
                       <p class="card-text"><strong class="card_titles">Type:</strong> {{ event.event_type }}</p>
                       <p class="card-text"><strong class="card_titles">Location:</strong> {{ event.location }}</p>
                       <p class="card-text"><strong class="card_titles">Organizer:</strong> {{
