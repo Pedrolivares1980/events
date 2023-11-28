@@ -81,7 +81,7 @@
           </div>
           <div class="row">
             <div class="col-12 d-flex justify-content-between">
-              <button type="submit" class="btn btn-primary ms-auto me-2 me-md-1">Filter</button>
+              <button type="submit" class="btn btn-danger ms-auto me-2 me-md-1">Filter</button>
               <a href="{{ url_for('events') }}" class="btn btn-success ms-2 ms-md-0 me-auto">Clear Filters</a>
             </div>
           </div>
@@ -92,15 +92,14 @@
         <div class="row mt-4">
           {% for event in events %}
           <div class="col-10 col-md-3 mb-3 ms-auto me-auto">
-            <div class="card event_cards">
-              <!-- Parte del acordeón visible inicialmente -->
+            <div class="card event_cards text-center">
               <img src="{{ url_for('static', filename='images/' ~ event.event_image) }}" class="card-img-top"
                 alt="{{ event.title }}">
-              <!-- Contenido del acordeón -->
-              <div class="accordion" id="accordionEvent{{ event.id }}">
-                <div class="accordion-item text-center">
+              <!-- Accordion -->
+              <div class="accordion " id="accordionEvent{{ event.id }}">
+                <div class="accordion-item ">
                   <h2 class="accordion-header" id="headingEvent{{ event.id }}">
-                    <button class="accordion-button collapsed scrolling-title" type="button" data-bs-toggle="collapse"
+                    <button class="accordion-button collapsed scrolling-title " type="button" data-bs-toggle="collapse"
                       data-bs-target="#collapseEvent{{ event.id }}" aria-expanded="false"
                       aria-controls="collapseEvent{{ event.id }}">
                       {{ event.title }}
@@ -108,9 +107,25 @@
                   </h2>
                   <div id="collapseEvent{{ event.id }}" class="accordion-collapse collapse"
                     aria-labelledby="headingEvent{{ event.id }}" data-bs-parent="#accordionEvent{{ event.id }}">
-                    <div class="accordion-body event_accordion">
-                      <div class="description_scroll">
-                        <p class="card-text"><strong class="card_titles">Description:</strong> {{ event.description }}</p>
+                    <div class="event_accordion">
+                      <!-- Nested Accordion for Description -->
+                      <div class="accordion mb-2" id="accordionDescription{{ event.id }}">
+                        <div class="accordion-item ">
+                          <h2 class="accordion-header" id="headingDescription{{ event.id }}">
+                            <button class="accordion-button collapsed custom-accordion-button" type="button"
+                              data-bs-toggle="collapse" data-bs-target="#collapseDescription{{ event.id }}"
+                              aria-expanded="false" aria-controls="collapseDescription{{ event.id }}">
+                              <strong class="card_titles">Description</strong>
+                            </button>
+                          </h2>
+                          <div id="collapseDescription{{ event.id }}" class="accordion-collapse collapse"
+                            aria-labelledby="headingDescription{{ event.id }}"
+                            data-bs-parent="#accordionDescription{{ event.id }}">
+                            <div class="accordion-body description_accordion">
+                              {{ event.description }}
+                            </div>
+                          </div>
+                        </div>
                       </div>
                       <p class="card-text"><strong class="card_titles">Type:</strong> {{ event.event_type }}</p>
                       <p class="card-text"><strong class="card_titles">Location:</strong> {{ event.location }}</p>
@@ -128,7 +143,7 @@
                   </div>
                 </div>
               </div>
-              <!-- Botón de reserva -->
+              <!-- Booking btn -->
               <div class="card-footer ms-auto me-auto">
                 {% if event.available_seats > 0 %}
                 <a href="{{ url_for('reserve', event_id=event.id) }}" class="btn btn-success">Book now</a>
