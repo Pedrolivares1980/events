@@ -7,20 +7,37 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Montserrat', 'Poppins', sans-serif;
+  scroll-behavior: smooth;
 }
 
-:root{
-  --bg-dark:#966C47;
-  --bg-light:#DB9D67;
-  --container-light:#6085A6;
-  --container-dark:#2C75DB;
-  --border:#038282;
-  --text-color:black;
-  --title-color:black;
-  --text-dark:black;
+:root {
+  --bg-dark: #966C47;
+  --bg-light: #DB9D67;
+  --container-light: #6085A6;
+  --container-dark: #2C75DB;
+  --border: #038282;
+  --text-color: black;
+  --title-color: black;
+  --text-dark: black;
 }
 
-html{
+/* Scroll bar */
+
+::-webkit-scrollbar {
+  width: .8rem;
+  background-color: black;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: .5rem;
+  background-color: var(--container-light);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--container-dark);
+}
+
+html {
   height: 100%;
 
 }
@@ -43,24 +60,25 @@ main {
 }
 
 
-textarea{
+textarea {
   resize: none;
 }
 
 
 /* -------------------------------------------------------------------------  BASE -------------------------------------------------------------------------  */
 
-#base_navbar{
+#base_navbar {
   background-color: var(--bg-dark);
 }
 
 
-.custom-navbar .nav-link, .custom-navbar .navbar-brand {
-  color: var(--title-color); 
+.custom-navbar .nav-link,
+.custom-navbar .navbar-brand {
+  color: var(--title-color);
 }
 
 .custom-navbar .navbar-toggler {
-  border-color: var(--title-color); 
+  border-color: var(--title-color);
 }
 
 .custom-navbar .navbar-toggler-icon {
@@ -68,30 +86,39 @@ textarea{
 }
 
 .navbar-nav .active-link a {
-  border: 1px solid white; 
+  border: 1px solid white;
 }
 
-.logo{
+.logo {
   color: var(--text-color);
   font-weight: 700;
 }
 
+
 /* -------------------------------------------------------------------------  INDEX ------------------------------------------------------------------------- */
 
-.title_events{
-  color: var(--title-color);
-  font-size: large;
-  font-weight: bolder;
-  margin-top: 2rem;
-  margin-bottom: 2.2rem;
-  border-bottom: .0625rem dashed var(--title-color);
+.title_movement {
+  font-weight: 900;
+  font-size: 3rem;
 }
+
+.title_movement .letter {
+  display: inline-block;
+  line-height: 1rem;
+}
+
+.slogan {
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+
+
 
 
 /* CAROUSEL */
 
 .carousel-item img {
-  height: 25rem; 
+  height: 25rem;
   object-fit: cover;
 }
 
@@ -102,15 +129,15 @@ textarea{
 }
 
 .event_cards img {
-  border-radius: 1rem 1rem 0 0; 
+  border-radius: 1rem 1rem 0 0;
 }
 
 .event_accordion {
-  background-color: var(--border); 
+  background-color: var(--border);
   color: var(--text-color);
 }
 
-.index_cards{
+.index_cards {
   background-color: var(--container-dark);
   border-radius: 1rem;
   color: var(--text-color);
@@ -120,7 +147,8 @@ textarea{
   border-radius: 1rem;
 }
 
-.event_cards .card-title, .event_cards .card-text {
+.event_cards .card-title,
+.event_cards .card-text {
   max-height: 6.25rem;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -132,26 +160,42 @@ textarea{
   text-overflow: ellipsis;
 }
 
-.card_titles{
+.card_titles {
   font-size: 1.2rem;
   color: var(--text-color);
 }
 
+
+.index_event {
+  color: var(--text-dark);
+  padding: 40px 0;
+  font-weight: 800;
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  overflow: hidden;
+}
+
+.index_event .letter {
+  display: inline-block;
+  line-height: 1rem;
+}
+
 /* ------------------------------------------------------------------------- EVENTS -------------------------------------------------------------------------  */
 
-.form_container{
+.form_container {
   background-color: var(--container-dark);
   color: var(--title-color);
 }
 
-.form_content{
+.form_content {
   background-color: var(--container-light);
   color: var(--text-color);
 }
 
 .accordion-body {
   overflow-y: auto;
-  max-height: 50rem; 
+  max-height: 50rem;
 }
 
 .scrolling-title {
@@ -167,14 +211,14 @@ textarea{
 
 .event-description-scrollable {
   max-height: 20rem;
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 
 
 
 /* ------------------------------------------------------------------------- REGISTER -------------------------------------------------------------------------  */
 
-.custom_form{
+.custom_form {
   background-color: var(--container-dark);
   border-radius: 1.25rem;
   max-width: 50rem;
@@ -183,19 +227,19 @@ textarea{
   color: var(--text-color);
 }
 
-.login_form{
+.login_form {
   max-width: 25rem;
 }
 
 
 /* -------------------------------------------------------------------------  USER PROFILE ------------------------------------------------------------------------- */
 
-.reservations{
+.reservations {
   /* width: 350px; */
   border-radius: 1rem;
 }
 
-.reservation_card{
+.reservation_card {
   max-width: 40rem;
   background-color: var(--container-dark);
   color: var(--title-color);
@@ -205,7 +249,7 @@ textarea{
   margin: 0 auto;
 }
 
-.event-details img{
+.event-details img {
   border-radius: 1rem;
   width: 18.75rem;
 }
@@ -218,7 +262,8 @@ textarea{
 
 
 footer {
-  margin-top: auto; /* Hace que el footer sea pegajoso */
+  margin-top: auto;
+  /* Hace que el footer sea pegajoso */
   background-color: var(--bg-dark);
   color: var(--title-color);
 }
@@ -226,8 +271,8 @@ footer {
 .social_icon {
   border-radius: 50%;
   background-color: var(--bg-dark);
-  display: inline-flex; 
-  align-items: center; 
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
@@ -236,21 +281,21 @@ footer {
 }
 
 .whatsapp_icon i {
-  color: #25D366; 
+  color: #25D366;
 }
 
 .github_icon i {
-  color: #171515; 
+  color: #171515;
 }
 
 .youtube_icon i {
-  color: #FF0000; 
+  color: #FF0000;
 }
 
 
 .social_icon:hover {
-  transform: scale(1.2); 
-  filter: brightness(1.2) saturate(1.5); 
+  transform: scale(1.2);
+  filter: brightness(1.2) saturate(1.5);
 }
 
 
