@@ -4,13 +4,14 @@
 
 {% block content %}
 <!-- User Profile Section -->
-<div class="container-fluid d-flex flex-column min-vh-100">
+<div class="container-fluid min-vh-100">
   <h2 class="text-center text-danger mt-3">Welcome {{ user.username }}!</h2>
   <h3 class="text-center mb-4">Here you can manage your Bookings</h3>
-  <div class="flex-grow-1 d-flex flex-column col-12 col-md-6 col-lg-3">
-    <div class="reservations">
-      {% for reservation in reservations %}
-      <div class="card reservation_card mb-3 mt-4 col-12 col-md-6 col-lg-4">
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+    {% for reservation in reservations %}
+    <div class="col mb-4">
+      <div class="card reservation_card">
         <div class="card-body">
           <h5 class="card-title fw-bolder fs-2">{{ reservation.event.title }}</h5>
           <p class="card-text"><strong class="card_titles">Event Type:</strong> {{ reservation.event.event_type }}</p>
@@ -29,33 +30,33 @@
             Reservation</a>
         </div>
       </div>
-      {% else %}
-      <p class="text-center">No reservations made yet.</p>
-      {% endfor %}
     </div>
-    <!-- Paginación -->
-    <div class="pagination_controls text-center mt-auto">
-      <nav aria-label="Events pagination">
-        <ul class="pagination justify-content-center">
-          <!-- Previous Page Link -->
-          <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
-            <a class="page-link" href="{{ url_for('user_profile', page=pagination.prev_num) }}" {% if not
-              pagination.has_prev %}aria-disabled="true" {% endif %}>Previous</a>
-          </li>
-          <!-- Page Numbers -->
-          {% for page_num in pagination.iter_pages() %}
-          <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
-            <a class="page-link" href="{{ url_for('user_profile', page=page_num) }}">{{ page_num }}</a>
-          </li>
-          {% endfor %}
-          <!-- Next Page Link -->
-          <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
-            <a class="page-link" href="{{ url_for('user_profile', page=pagination.next_num) }}" {% if not
-              pagination.has_next %}aria-disabled="true" {% endif %}>Next</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+    {% else %}
+    <p class="text-center">No reservations made yet.</p>
+    {% endfor %}
   </div>
+</div>
+<!-- Pagination -->
+<div class="pagination_controls text-center mt-3">
+  <nav aria-label="Events pagination">
+    <ul class="pagination justify-content-center">
+      <!-- Previous Page Link -->
+      <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+        <a class="page-link" href="{{ url_for('user_profile', page=pagination.prev_num) }}" {% if not
+          pagination.has_prev %}aria-disabled="true" {% endif %}>Previous</a>
+      </li>
+      <!-- Page Numbers -->
+      {% for page_num in pagination.iter_pages() %}
+      <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
+        <a class="page-link" href="{{ url_for('user_profile', page=page_num) }}">{{ page_num }}</a>
+      </li>
+      {% endfor %}
+      <!-- Next Page Link -->
+      <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+        <a class="page-link" href="{{ url_for('user_profile', page=pagination.next_num) }}" {% if not
+          pagination.has_next %}aria-disabled="true" {% endif %}>Next</a>
+      </li>
+    </ul>
+  </nav>
 </div>
 {% endblock %}

@@ -100,29 +100,29 @@
       {% endfor %}
     </div>
   </div>
-  <!-- Pagination -->
-  <div class="pagination_controls text-center mt-auto mb-1">
-    <nav aria-label="Events pagination">
-      <ul class="pagination justify-content-center">
-        <!-- Previous Page Link -->
-        <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
-          <a class="page-link" href="{{ url_for('business_profile', page=pagination.prev_num) }}" {% if not
-            pagination.has_prev %}aria-disabled="true" {% endif %}>Previous</a>
-        </li>
-        <!-- Page Numbers -->
-        {% for page_num in pagination.iter_pages() %}
-        <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
-          <a class="page-link" href="{{ url_for('business_profile', page=page_num) }}">{{ page_num }}</a>
-        </li>
-        {% endfor %}
-        <!-- Next Page Link -->
-        <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
-          <a class="page-link" href="{{ url_for('business_profile', page=pagination.next_num) }}" {% if not
-            pagination.has_next %}aria-disabled="true" {% endif %}>Next</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
+</div>
+<!-- Pagination -->
+<div class="pagination_controls text-center mt-auto mb-1">
+  <nav aria-label="Events pagination">
+    <ul class="pagination justify-content-center">
+      <!-- Previous Page Link -->
+      <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+        <a class="page-link" href="{{ url_for('business_profile', page=pagination.prev_num) }}" {% if not
+          pagination.has_prev %}aria-disabled="true" {% endif %}>Previous</a>
+      </li>
+      <!-- Page Numbers -->
+      {% for page_num in pagination.iter_pages() %}
+      <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
+        <a class="page-link" href="{{ url_for('business_profile', page=page_num) }}">{{ page_num }}</a>
+      </li>
+      {% endfor %}
+      <!-- Next Page Link -->
+      <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+        <a class="page-link" href="{{ url_for('business_profile', page=pagination.next_num) }}" {% if not
+          pagination.has_next %}aria-disabled="true" {% endif %}>Next</a>
+      </li>
+    </ul>
+  </nav>
 </div>
 
 {% endblock %}
