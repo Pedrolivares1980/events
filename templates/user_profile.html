@@ -11,8 +11,8 @@
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
     {% for reservation in reservations %}
     <div class="col mb-4">
-      <div class="card reservation_card">
-        <div class="card-body">
+      <div class="card reservation_card d-flex">
+        <div class="card-body flex-grow-1">
           <h5 class="card-title fw-bolder fs-2">{{ reservation.event.title }}</h5>
           <p class="card-text"><strong class="card_titles">Event Type:</strong> {{ reservation.event.event_type }}</p>
           <p class="card-text"><strong class="card_titles">Location:</strong> {{ reservation.event.location }}</p>
@@ -26,8 +26,9 @@
             reservation.event.organizer.company_name }}</p>
           <p class="card-text"><strong class="card_titles">Description:</strong> {{ reservation.event.description }}</p>
           <p class="card-text p-2"><strong class="card_titles">Seats Reserved:</strong> {{ reservation.seats }}</p>
-          <a href="{{ url_for('edit_reservation', reservation_id=reservation.id) }}" class="btn btn-success">Edit
-            Reservation</a>
+        </div>
+        <div class="text-center m-2 mb-3 ">
+          <a href="{{ url_for('edit_reservation', reservation_id=reservation.id) }}" class="btn btn-success">Edit Reservation</a>
         </div>
       </div>
     </div>
