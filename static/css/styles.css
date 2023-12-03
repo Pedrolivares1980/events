@@ -250,6 +250,7 @@ textarea {
 .card_content{
   padding: 1rem;
   height: 500px;
+  overflow: scroll;
   scroll-behavior: smooth;
 }
 
