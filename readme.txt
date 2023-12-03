@@ -31,7 +31,8 @@ The app has the following features:
 * User registration and login,
 * Business registration and login,
 * Creating events with a title, description, location, date, time,
-* View, edit o cancel any event or any booking of an this business event
+* View and edit any event of the company,
+*View, edit and cancel any booking in the users profile,
 * Dashboard with a list of events,
 * Events listing with filtering by date, location, or category,
 * Searching for an event using keywords,
@@ -47,4 +48,4 @@ The app is structured as follows:
 * `config.py`: Contains the configuration used by the app.
 * `models.py`: Contains the databases models.
 * `templates`: The Jinja2 templates used by the app.
-* `static`: The static files used by the app.
+* `static`: The static files used by the app, including images, css files and javascript.

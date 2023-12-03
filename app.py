@@ -442,18 +442,18 @@ def reserve(event_id):
         flash("Business users cannot make reservations.", "danger")
         return redirect(url_for("events"))
 
+    # Calculate available seats for the specific event
+    total_reserved_seats = sum(
+        reservation.seats for reservation in event.reservations
+    )
+    available_seats = event.capacity - total_reserved_seats
+
     if request.method == "POST":
         try:
             seats = int(request.form["seats"])
         except ValueError:
             flash("Invalid number of seats.", "danger")
             return redirect(url_for("reserve", event_id=event_id))
-
-        # Calculate available seats
-        total_reserved_seats = sum(
-            reservation.seats for reservation in event.reservations
-        )
-        available_seats = event.capacity - total_reserved_seats
 
         # Check if there are enough seats available
         if seats <= available_seats:
@@ -469,10 +469,9 @@ def reserve(event_id):
 
         return redirect(url_for("events"))
 
-    return render_template("reserve.html", event=event)
+    return render_template("reserve.html", event=event, available_seats=available_seats)
 
 
-# 
 # Route for edit reservations
 @app.route("/edit_reservation/<int:reservation_id>", methods=["GET", "POST"])
 @login_required
@@ -522,7 +521,6 @@ def edit_reservation(reservation_id):
         event=event,
         available_seats=available_seats,
     )
-
 
 
 if __name__ == "__main__":
