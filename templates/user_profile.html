@@ -11,8 +11,8 @@
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
     {% for reservation in reservations %}
     <div class="col mb-4">
-      <div class="card reservation_card d-flex">
-        <div class="card-body flex-grow-1">
+      <div class="card reservation_card">
+        <div class="card-body card_content">
           <h5 class="card-title fw-bolder fs-2">{{ reservation.event.title }}</h5>
           <p class="card-text"><strong class="card_titles">Event Type:</strong> {{ reservation.event.event_type }}</p>
           <p class="card-text"><strong class="card_titles">Location:</strong> {{ reservation.event.location }}</p>
