@@ -248,10 +248,9 @@ textarea {
 }
 
 .card_content{
-  padding: 1rem;
+  border:none;
   height: 500px;
   overflow: scroll;
-  scroll-behavior: smooth;
 }
 
 
