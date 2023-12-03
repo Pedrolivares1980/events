@@ -1,50 +1,51 @@
 {% extends 'base.html' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}EventSphere Register{% endblock %}
 
 {% block content %}
 <div class="container mt-3 mt-md-5 mb-5 mb-md-0  min-vh-100">
-    <h2 class="mb-3 text-center">Register</h2>
-    <form method="post" class="card p-4 custom_form login_form mb-4">
-        <!-- Username Field -->
-        <div class="mb-3 p-0 p-md-2 plg-4 ">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control form_content" id="username" name="username" maxlength="80" required>
-        </div>
+  <h2 class="mb-3 text-center">Register</h2>
+  <form method="post" class="card p-4 custom_form login_form mb-4">
+    <!-- Username Field -->
+    <div class="mb-3 p-0 p-md-2 plg-4 ">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control form_content" id="username" name="username" maxlength="80" required>
+    </div>
 
-        <!-- Email Field -->
-        <div class="mb-3 p-0 p-md-2 plg-4 ">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control form_content" id="email" name="email" maxlength="120" required>
-        </div>
+    <!-- Email Field -->
+    <div class="mb-3 p-0 p-md-2 plg-4 ">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control form_content" id="email" name="email" maxlength="120" required>
+    </div>
 
-        <!-- Password Field -->
-        <div class="mb-3 p-0 p-md-2 plg-4 ">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control form_content" id="password" name="password" maxlength="128" required>
-        </div>
+    <!-- Password Field -->
+    <div class="mb-3 p-0 p-md-2 plg-4 ">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control form_content" id="password" name="password" maxlength="128" required>
+    </div>
 
-        <!-- Business User Checkbox -->
-        <div class="mb-3 p-0 p-md-2 plg-4 ps-2 ps-md-4 form-check">
-            <input type="checkbox" class="form-check-input" id="is_business" name="is_business">
-            <label class="form-check-label  fs-5" for="is_business">Register as business user</label>
-        </div>
+    <!-- Business User Checkbox -->
+    <div class="mb-3 p-0 p-md-2 plg-4 ps-2 ps-md-4 form-check">
+      <input type="checkbox" class="form-check-input" id="is_business" name="is_business">
+      <label class="form-check-label  fs-5" for="is_business">Register as business user</label>
+    </div>
 
-        <!-- Company Name Field (Hidden initially) -->
-        <div class="mb-3 p-0 p-md-2 plg-4" id="company_name_container" style="display: none;">
-            <label for="company_name" class="form-label">Company Name</label>
-            <input type="text" class="form-control" id="company_name" name="company_name" maxlength="100">
-        </div>
+    <!-- Company Name Field (Hidden initially) -->
+    <div class="mb-3 p-0 p-md-2 plg-4" id="company_name_container" style="display: none;">
+      <label for="company_name" class="form-label">Company Name</label>
+      <input type="text" class="form-control" id="company_name" name="company_name" maxlength="100">
+    </div>
 
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-danger w-auto ms-auto me-auto">Register</button>
-        <p class="mt-3 text-center fw-bold fs-5 fs-md-3">
-            Already have an account? <a class=" btn btn-success w-auto  ms-md-4 mt-3 mt-md-0" href="{{ url_for('login') }}">Login here</a>
-        </p>
-    </form>
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-danger w-auto ms-auto me-auto">Register</button>
+    <p class="mt-3 text-center fw-bold fs-5 fs-md-3">
+      Already have an account? <a class=" btn btn-success w-auto  ms-md-4 mt-3 mt-md-0"
+        href="{{ url_for('login') }}">Login here</a>
+    </p>
+  </form>
 
 </div>
 
-<!-- Include the custom JavaScript file -->
+<!-- Custom JavaScript -->
 <script src="{{ url_for('static', filename='js/register.js') }}"></script>
 {% endblock %}

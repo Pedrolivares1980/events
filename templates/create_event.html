@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Create Event{% endblock %}
+{% block title %}EventSphere Create Event{% endblock %}
 
 {% block content %}
 <div class="container  min-vh-100">
@@ -13,12 +13,14 @@
 
     <h3 class="text-center"> New Event</h3>
     <form method="post" class="card p-4 custom_form mb-4">
+
       <!-- Title Field -->
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input type="text" class="form-control" id="title" name="title" maxlength="100" required>
       </div>
 
+      <!-- Location Field -->
       <div class="mb-3">
         <label for="location" class="form-label">Location</label>
         <input type="text" class="form-control" name="location" maxlength="120" id="location" value="">
@@ -31,7 +33,6 @@
       </div>
 
       <!-- Start Date Field -->
-
       <div class="mb-3">
         <label for="event_date" class="form-label">Event Date</label>
         <input type="date" class="form-control" id="event_date" name="event_date" required>

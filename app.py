@@ -12,10 +12,10 @@ app.config["SECRET_KEY"] = SECRET_KEY
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-# Initialize database with the Flask app
+# Initialize database
 db.init_app(app)
 
-# Create database tables within app context
+# Create database tables
 with app.app_context():
     db.create_all()
 
@@ -94,7 +94,7 @@ def index():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """
-    Handles user registration. If it's a POST request, processes the form data to register a new user.
+    Handles user registration. Processes the form data to register a new user.
     Includes validation for field lengths and checks for existing usernames or emails.
     """
     if request.method == "POST":
@@ -150,7 +150,7 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """
-    Handles user login. If it's a POST request, it processes the form data to authenticate the user.
+    Handles user login. It processes the form data to authenticate the user.
     On successful login, the user's ID and their business status are stored in the session.
     """
     if request.method == "POST":
@@ -185,7 +185,7 @@ def logout():
     """
     # Clearing the user's session data
     session.pop("user_id", None)
-    session.pop("is_business", None)  # Ensure to clear business status as well
+    session.pop("is_business", None)  # Clearing business status as well
 
     flash("You have been logged out.", "success")
     return redirect(url_for("index"))
@@ -203,7 +203,7 @@ def business_profile():
     user_id = session["user_id"]
     events = Event.query.filter_by(organizer_id=user_id).all()
 
-    # Pagination setup
+    # Pagination
     page = request.args.get("page", 1, type=int)
     per_page = request.args.get("per_page", 8, type=int)
     events_paginated = Event.query.filter_by(organizer_id=user_id).paginate(
@@ -316,7 +316,7 @@ def edit_event(event_id):
         event.description = request.form["description"]
         event.location = request.form["location"]
 
-        # Validation for field lengths with specific error messages
+        # Validation for field lengths with error messages
         if len(event.title) > 100:
             flash("Title is too long. Maximum 100 characters allowed.", "danger")
             return render_template("edit_event.html", event=event)
@@ -350,7 +350,7 @@ def edit_event(event_id):
 @app.route("/events")
 def events():
     """
-    Displays a list of events based on search criteria. Includes filters for event type, start and end dates, and a search term.
+    Displays the list of events. Includes filters for event type, start and end dates, and a search term.
     Implements pagination for displaying the events.
     """
     search = request.args.get("search", "")
@@ -374,7 +374,7 @@ def events():
             or_(Event.title.like(search_term), Event.description.like(search_term))
         )
 
-    # Set up pagination
+    # Pagination
     page = request.args.get("page", 1, type=int)
     per_page = request.args.get("per_page", 8, type=int)
     events_paginated = query.paginate(page=page, per_page=per_page, error_out=False)
@@ -472,6 +472,7 @@ def reserve(event_id):
     return render_template("reserve.html", event=event)
 
 
+# 
 # Route for edit reservations
 @app.route("/edit_reservation/<int:reservation_id>", methods=["GET", "POST"])
 @login_required
@@ -489,6 +490,11 @@ def edit_reservation(reservation_id):
     if session["user_id"] != reservation.user_id:
         flash("You can only edit your own reservations.", "danger")
         return redirect(url_for("user_profile"))
+    
+    # Calculate available seats for the specific event
+    total_reserved_seats = sum(res.seats for res in event.reservations)
+    available_seats = event.capacity - total_reserved_seats
+    event.available_seats = available_seats
 
     if request.method == "POST":
         if "cancel" in request.form:
@@ -496,30 +502,19 @@ def edit_reservation(reservation_id):
             db.session.delete(reservation)
             db.session.commit()
             flash("Reservation cancelled successfully.", "success")
+            return redirect(url_for("user_profile"))
+
+        # Update the number of seats in the reservation
+        seats = int(request.form["seats"])
+
+        # Check if the updated number of seats is available
+        if seats <= available_seats:
+            reservation.seats = seats
+            db.session.commit()
+            flash("Reservation updated successfully.", "success")
+            return redirect(url_for("user_profile"))
         else:
-            # Update the number of seats in the reservation
-            seats = int(request.form["seats"])
-
-            # Calculate available seats excluding the current reservation
-            total_reserved_seats_by_others = sum(
-                r.seats for r in event.reservations if r.id != reservation_id
-            )
-            available_seats = (
-                event.capacity - total_reserved_seats_by_others + reservation.seats
-            )
-
-            # Check if the updated number of seats is available
-            if seats <= available_seats:
-                reservation.seats = seats
-                db.session.commit()
-                flash("Reservation updated successfully.", "success")
-            else:
-                flash("Not enough seats available.", "danger")
-                return redirect(
-                    url_for("edit_reservation", reservation_id=reservation_id)
-                )
-
-        return redirect(url_for("user_profile"))
+            flash("Not enough seats available.", "danger")
 
     return render_template(
         "edit_reservation.html",
@@ -527,6 +522,7 @@ def edit_reservation(reservation_id):
         event=event,
         available_seats=available_seats,
     )
+
 
 
 if __name__ == "__main__":

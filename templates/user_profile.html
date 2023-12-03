@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}User Profile{% endblock %}
+{% block title %}EventSphere User Profile{% endblock %}
 
 {% block content %}
 <!-- User Profile Section -->
@@ -15,10 +15,14 @@
           <h5 class="card-title fw-bolder fs-2">{{ reservation.event.title }}</h5>
           <p class="card-text"><strong class="card_titles">Event Type:</strong> {{ reservation.event.event_type }}</p>
           <p class="card-text"><strong class="card_titles">Location:</strong> {{ reservation.event.location }}</p>
-          <p class="card-text"><strong class="card_titles">Event Date:</strong> {{ reservation.event.event_date.strftime('%d %b %Y') }}</p>
-          <p class="card-text"><strong class="card_titles">Start Time:</strong> {{ reservation.event.start_time.strftime('%H:%M') }}</p>
-          <p class="card-text"><strong class="card_titles">Duration:</strong> {{ reservation.event.duration }} minutes</p>
-          <p class="card-text"><strong class="card_titles">Organizer:</strong> {{ reservation.event.organizer.company_name }}</p>
+          <p class="card-text"><strong class="card_titles">Event Date:</strong> {{
+            reservation.event.event_date.strftime('%d %b %Y') }}</p>
+          <p class="card-text"><strong class="card_titles">Start Time:</strong> {{
+            reservation.event.start_time.strftime('%H:%M') }}</p>
+          <p class="card-text"><strong class="card_titles">Duration:</strong> {{ reservation.event.duration }} minutes
+          </p>
+          <p class="card-text"><strong class="card_titles">Organizer:</strong> {{
+            reservation.event.organizer.company_name }}</p>
           <p class="card-text"><strong class="card_titles">Description:</strong> {{ reservation.event.description }}</p>
           <p class="card-text p-2"><strong class="card_titles">Seats Reserved:</strong> {{ reservation.seats }}</p>
           <a href="{{ url_for('edit_reservation', reservation_id=reservation.id) }}" class="btn btn-success">Edit

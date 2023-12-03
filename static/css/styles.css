@@ -12,7 +12,7 @@
 
 :root {
   --bg-dark: #966C47;
-  --bg-light: #DB9D67;
+  --bg-light: bisque;
   --container-light: #6085A6;
   --container-dark: #2C75DB;
   --border: #038282;
@@ -37,35 +37,25 @@
   background-color: var(--container-dark);
 }
 
-html {
-  height: 100vh;
-}
-
 body{
   background-color: var(--bg-light);
   color: var(--text-dark);
 }
-
-
 
 .main-container {
   padding: 1rem;
   padding-top: 3.2rem;
 }
 
-
-
 textarea {
   resize: none;
 }
-
 
 /* -------------------------------------------------------------------------  BASE -------------------------------------------------------------------------  */
 
 #base_navbar {
   background-color: var(--bg-dark);
 }
-
 
 .custom-navbar .nav-link,
 .custom-navbar .navbar-brand {
@@ -106,7 +96,6 @@ textarea {
   font-weight: 900;
   font-size: 1.1rem;
 }
-
 
 /* CAROUSEL */
 
@@ -165,7 +154,7 @@ textarea {
   color: var(--text-dark);
   padding: 40px 0;
   font-weight: 800;
-  font-size: 2rem;
+  font-size:1.2rem;
   text-transform: uppercase;
   letter-spacing: 0.5rem;
   overflow: hidden;
@@ -194,7 +183,6 @@ textarea {
   background-color: var(--border);
 }
 
-
 .form_container {
   background-color: var(--container-dark);
   color: var(--title-color);
@@ -205,7 +193,7 @@ textarea {
   color: var(--text-color);
 }
 
-
+/* Scroll the event title if too large */
 .scrolling-title {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -217,12 +205,13 @@ textarea {
   white-space: normal;
 }
 
+/* Nested accordion dor events description */
 .description_accordion{
   background-color: var(--border);
   color: var(--text-dark);
 }
 
-/* ------------------------------------------------------------------------- REGISTER -------------------------------------------------------------------------  */
+/* ------------------------------------------------------------------------- REGISTER & LOGIN -------------------------------------------------------------------------  */
 
 .custom_form {
   background-color: var(--container-dark);
@@ -237,11 +226,9 @@ textarea {
   max-width: 25rem;
 }
 
-
 /* -------------------------------------------------------------------------  USER PROFILE ------------------------------------------------------------------------- */
 
 .reservations {
-  /* width: 350px; */
   border-radius: 1rem;
 }
 
@@ -264,9 +251,6 @@ textarea {
 
 
 /* ------------------------------------------------------------------------- FOOTER -------------------------------------------------------------------------  */
-
-
-
 
 footer {
   margin-top: auto;
@@ -298,18 +282,24 @@ footer {
   color: #FF0000;
 }
 
-
 .social_icon:hover {
   transform: scale(1.2);
   filter: brightness(1.2) saturate(1.5);
 }
 
-
-
 /* ------------------------------------------------------------------------- large Screens -------------------------------------------------------------------------  */
+
 @media (min-width:980px) {
+  
+  /* Carousel images */
   .carousel-item img {
     height: 50rem;
     object-fit: contain;
+  }
+
+  /* Index */
+  .index_event {
+    font-size:2rem;
+
   }
 }

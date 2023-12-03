@@ -6,13 +6,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Function to toggle the display of the company name field
   function toggleCompanyNameField() {
-      // If the checkbox is checked, show the company name field
-      if (isBusinessCheckbox.checked) {
-          companyNameContainer.style.display = 'block';
-      } else {
-          // Otherwise, hide it
-          companyNameContainer.style.display = 'none';
-      }
+    // If the checkbox is checked, show the company name field
+    if (isBusinessCheckbox.checked) {
+      companyNameContainer.style.display = 'block';
+    } else {
+      // Otherwise, hide it
+      companyNameContainer.style.display = 'none';
+    }
   }
 
   // Add a change event listener to the checkbox
