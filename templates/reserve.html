@@ -9,11 +9,10 @@
 
   <!-- Event Image -->
   <div class="text-center mb-3">
-    <img src="{{ url_for('static', filename='images/' ~ event.event_image) }}" alt="{{ event.event_type }}"
-      class="img-fluid">
+    <img src="{{ url_for('static', filename='images/' ~ event.event_image) }}" alt="{{ event.event_type }}" class="img-fluid">
   </div>
 
-  <!-- Event Timings -->
+  <!-- Event Details -->
   <div class="mb-3 text-center">
     <p><strong class="card_titles">Organized by:</strong> {{ event.organizer.username }}</p>
     <p><strong class="card_titles">Event Type:</strong> {{ event.event_type }}</p>

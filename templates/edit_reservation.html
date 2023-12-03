@@ -9,8 +9,7 @@
   <div class="reservation_card p-3">
     <!-- Display event details with Image, Type, and Organizer -->
     <div class="event-details ">
-      <img src="{{ url_for('static', filename='images/' ~ event.event_image) }}" alt="{{ event.title }}"
-        class="img-fluid">
+      <img src="{{ url_for('static', filename='images/' ~ event.event_image) }}" alt="{{ event.title }}" class="img-fluid">
       <p><strong class="card_titles">Event:</strong> {{ event.title }}</p>
       <p><strong class="card_titles">Location:</strong> {{ event.location }}</p>
       <p><strong class="card_titles">Description:</strong> {{ event.description }}</p>

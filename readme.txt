@@ -22,6 +22,7 @@ To run the app, simply run:
 
 ```
 python app.py
+
 ```
 
 ## Features
@@ -32,12 +33,11 @@ The app has the following features:
 * Business registration and login,
 * Creating events with a title, description, location, date, time,
 * View and edit any event of the company,
-*View, edit and cancel any booking in the users profile,
 * Dashboard with a list of events,
 * Events listing with filtering by date, location, or category,
 * Searching for an event using keywords,
 * Book spaces for an event
-* View, edit o cancel the bookings
+* View, edit and cancel any booking in the users profile,
 
 
 ## Code Structure
