@@ -228,28 +228,20 @@ textarea {
 
 /* -------------------------------------------------------------------------  USER & BUSINESS PROFILE ------------------------------------------------------------------------- */
 
-.reservations {
-  border-radius: 1rem;
-}
-
 .reservation_card {
-  /* max-width: 40rem; */
   background-color: var(--container-dark);
   color: var(--title-color);
   text-align: center;
-  border: .09rem solid black;
-  border-radius: 1rem;
   margin: 0 auto;
 }
 
 .event-details img {
-  border-radius: 1rem;
   width: 18.75rem;
 }
 
 .card_content{
   border:none;
-  height: 500px;
+  height: 40rem;
   overflow: scroll;
 }
 
